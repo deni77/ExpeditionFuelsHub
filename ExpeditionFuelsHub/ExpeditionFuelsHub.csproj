@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ExpeditionFuelsHub.Core\ExpeditionFuelsHub.Core.csproj" />
+    <ProjectReference Include="..\ExpeditionFuelsHub.Infrastructure\ExpeditionFuelsHub.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

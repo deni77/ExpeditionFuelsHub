@@ -1,6 +1,8 @@
 //using ExpeditionFuelsHub.Infrastructure.Data;
+using ExpeditionFuelsHub.Contracts;
 using ExpeditionFuelsHub.Infrastrucure;
 using ExpeditionFuelsHub.Infrastrucure.Data;
+using ExpeditionFuelsHub.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,9 +13,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireUppercase = false;
+    })
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddControllersWithViews();
+
+//services
+//builder.Services.AddTransient<IBillLadingService, BillLadingService>(); // be6e AddScoped
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

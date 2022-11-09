@@ -32,6 +32,9 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                              ProductId=2,
                               PurposeId=2,
                                VehicleId=2,
+                                ImageUrl="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com"+
+                                "%2Fsearch%2Flading&psig=AOvVaw2tUOG-Jc5wN3urHQQoahJ7&ust=1668056204630000&"+
+                                "source=images&cd=vfe&ved=0CAwQjRxqFwoTCLiSjt6noPsCFQAAAAAdAAAAABBx",
                         IsValid=true,
                          ModifiedOn=DateTime.Now
                 },

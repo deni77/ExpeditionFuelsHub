@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpeditionFuelsHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221107141555_AllTables")]
-    partial class AllTables
+    [Migration("20221109051058_addFieldImageUrlPlusAllTables")]
+    partial class addFieldImageUrlPlusAllTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,6 +44,10 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                     b.Property<decimal>("GrossStandardVolume")
                         .HasPrecision(18, 3)
                         .HasColumnType("decimal(18,3)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsValid")
                         .HasColumnType("bit");
@@ -87,13 +91,14 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(4039),
+                            CreatedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4883),
                             DistributionChannelId = 1,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 9768.876m,
+                            ImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Flading&psig=AOvVaw2tUOG-Jc5wN3urHQQoahJ7&ust=1668056204630000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCLiSjt6noPsCFQAAAAAdAAAAABBx",
                             IsValid = true,
                             Mass = 3423.879m,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(4045),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4890),
                             ProductId = 2,
                             PurposeId = 2,
                             VehicleId = 2,
@@ -129,28 +134,28 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = 1,
                             IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3913),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4757),
                             Name = "DistributionChannel_1"
                         },
                         new
                         {
                             Id = 2,
                             IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3921),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4765),
                             Name = "DistributionChannel_2"
                         },
                         new
                         {
                             Id = 3,
                             IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3924),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4767),
                             Name = "DistributionChannel_3"
                         },
                         new
                         {
                             Id = 4,
                             IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3927),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4769),
                             Name = "DistributionChannel_4"
                         });
                 });
@@ -221,7 +226,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                             Id = 1,
                             FullName = "А-95Н",
                             IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3143),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4009),
                             ProductCode = "552"
                         },
                         new
@@ -229,7 +234,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                             Id = 2,
                             FullName = "А-95НВ",
                             IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3188),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4185),
                             ProductCode = "101"
                         },
                         new
@@ -237,7 +242,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                             Id = 3,
                             FullName = "А-98 ЕКТО",
                             IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3191),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4189),
                             ProductCode = "102"
                         },
                         new
@@ -245,7 +250,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                             Id = 4,
                             FullName = "А-98 Н1",
                             IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3194),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4192),
                             ProductCode = "105"
                         });
                 });
@@ -278,28 +283,28 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = 1,
                             Code = (byte)65,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3674),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4515),
                             Name = "ForCountry"
                         },
                         new
                         {
                             Id = 2,
                             Code = (byte)66,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3687),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4527),
                             Name = "ForCountry_1"
                         },
                         new
                         {
                             Id = 3,
                             Code = (byte)64,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3690),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4529),
                             Name = "ForCountry_3"
                         },
                         new
                         {
                             Id = 4,
                             Code = (byte)67,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3692),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4532),
                             Name = "ForCountry_4"
                         });
                 });
@@ -337,7 +342,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = 1,
                             IsValid = false,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3811),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4649),
                             RegistrationNumber = "AV9876BH",
                             VehicleRegistrationDocumentNumber = "ACF4566ASSSS"
                         },
@@ -345,7 +350,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = 2,
                             IsValid = false,
-                            ModifiedOn = new DateTime(2022, 11, 7, 16, 15, 54, 990, DateTimeKind.Local).AddTicks(3822),
+                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4658),
                             RegistrationNumber = "BB9876aa",
                             VehicleRegistrationDocumentNumber = "ACF4566ASSSSFGR"
                         });
@@ -472,15 +477,15 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "583c7c12-4aab-4345-bf4d-5bc1cc59f442",
+                            ConcurrencyStamp = "3aac5932-bfa5-4b12-ad3d-6c8650378210",
                             Email = "fdispenser@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "fdispenser@mail.com",
                             NormalizedUserName = "fdispenser@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGPowsvd2NA41Kjwl7TE7TZfWIgCNZzDRfeMqC55HYeX7cd7fWHn5O/pUPbkBHn4Xg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH2VB4W0WDcaCXNNuibtmI3tKdQ1IKjkPgCtAunYAq+5A9ke0uXQqckbr8Vq97P9ow==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7096191a-5c21-4b76-a401-b55a562a7a64",
+                            SecurityStamp = "e984af6e-5864-49ee-b0b1-67e6b34cd0ee",
                             TwoFactorEnabled = false,
                             UserName = "fdispenser@mail.com"
                         },
@@ -488,15 +493,15 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7a2cd56-c88f-405e-b8bf-44d06e4a43f0",
+                            ConcurrencyStamp = "2910cf79-a9ad-40d7-a83c-1ae4d2222889",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBirgBQDHHKNOmHO6F9GGcMif+B6SHz0Q22IvWnagAOgILGwdsIrnAbcilOej+7Tsg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOz55s+UPoFWIFGBi7xjD9K2XfF/SkOOBEwPh59qhSgzc73iYUUOyaB0rzpbj7n0LQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a577501f-fb3f-4e95-bdb2-e8261d9a0c99",
+                            SecurityStamp = "3b8e95ff-ed9d-44d2-96de-cbef5ecca41d",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });

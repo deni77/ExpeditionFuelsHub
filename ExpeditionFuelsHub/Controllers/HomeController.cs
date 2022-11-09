@@ -1,4 +1,8 @@
-﻿using ExpeditionFuelsHub.Models;
+﻿using ExpeditionFuelsHub.Contracts;
+using ExpeditionFuelsHub.Infrastructure.Data.Entities;
+using ExpeditionFuelsHub.Infrastrucure.Data;
+using ExpeditionFuelsHub.Models;
+using ExpeditionFuelsHub.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +10,16 @@ namespace ExpeditionFuelsHub.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IBillLadingService service;
+        public HomeController(IBillLadingService _service)
         {
-            _logger = logger;
+            service = _service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var bills=await this.service.GetLastTwoBillLadingAsync();
+            return View(bills);
         }
 
        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

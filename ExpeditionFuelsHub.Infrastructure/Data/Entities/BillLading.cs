@@ -18,6 +18,9 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Entities
         public DateTime CreatedOn  { get; set; }
 
         [Required]
+          public string ImageUrl  { get; set; }
+
+        [Required]
          [Precision(18,3)]
         public decimal GrossStandardVolume { get; set; }
 

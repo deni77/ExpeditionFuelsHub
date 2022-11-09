@@ -22,7 +22,7 @@ namespace ExpeditionFuelsHub.Services
                 .OrderByDescending(x => x.Id).ToListAsync();
 
 
-           return entities .Select(x => new BillladingServiceViewModel()
+           return entities.Select(x => new BillladingServiceViewModel()
             {
                 Id = x.Id,
                 ImageUrl = x.ImageUrl,

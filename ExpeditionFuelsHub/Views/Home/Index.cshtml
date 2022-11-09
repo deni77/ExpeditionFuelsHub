@@ -37,12 +37,12 @@
             @*var bill = bills[i];*@
                     <div class="carousel-item @(first ? "active" : string.Empty)">
                        
-                    <img class="d-block w-100" style="height:400px"
+                    <img class="d-block w-100" style="height:500px"
                     src="@bill.ImageUrl" alt="@bill.GrossStandardVolume">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>
                             <a class="btn btn-primary" asp-controller="BillLading" asp-action="Details"
-                            asp-route-id="@bill.Id"> @bill.GrossStandardVolume</a>
+                            asp-route-id="@bill.Id">Продукт: @bill.Product</a>
                         </h5>
                     </div>
                 </div>

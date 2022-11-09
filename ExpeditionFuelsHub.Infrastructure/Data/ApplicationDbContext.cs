@@ -25,37 +25,6 @@ namespace ExpeditionFuelsHub.Infrastrucure.Data
         {
             // builder.Entity<User>().ToTable("AspNetUsers");
 
-            //builder.Entity<BillLading>()
-            //    .HasOne(t => t.DistributionChannel)
-            //    .WithMany(b => b.BillLadings)
-            //    .HasForeignKey(t => t.DistributionChannelId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //builder.Entity<BillLading>()
-            //    .HasOne(t => t.Product)
-            //    .WithMany(b => b.BillLadings)
-            //    .HasForeignKey(t => t.ProductId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            // builder.Entity<BillLading>()
-            //    .HasOne(t => t.Purpose)
-            //    .WithMany(b => b.BillLadings)
-            //    .HasForeignKey(t => t.PurposeId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            // builder.Entity<BillLading>()
-            //    .HasOne(t => t.Vehicle)
-            //    .WithMany(b => b.BillLadings)
-            //    .HasForeignKey(t => t.VehicleId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            ////FuelDispennser
-            //  builder.Entity<BillLading>()
-            //    .HasOne(t => t.FuelDispenser)
-            //    .WithMany()
-            //    .HasForeignKey(t => t.FuelDispenserId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new FuelDispenserConfiguration());
 

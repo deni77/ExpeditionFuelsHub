@@ -29,16 +29,45 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                         WriterUserId="6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                            FuelDispenserId=1,
                             DistributionChannelId=1,
+                             ProductId=1,
+                              PurposeId=1,
+                               VehicleId=1,
+                                ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGHWB3llPsds5z8yK2Ao6aOe0eN2-mATIz0A&usqp=CAU",
+                                IsValid=true,
+                         ModifiedOn=DateTime.Now
+                },
+                new BillLading()
+                {
+                    Id = 2,
+                     Mass=34453423.879M,
+                      GrossStandardVolume=9345768.876M,
+                       CreatedOn=DateTime.Now,
+                        WriterUserId="6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                           FuelDispenserId=1,
+                            DistributionChannelId=2,
                              ProductId=2,
                               PurposeId=2,
                                VehicleId=2,
-                                ImageUrl="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com"+
-                                "%2Fsearch%2Flading&psig=AOvVaw2tUOG-Jc5wN3urHQQoahJ7&ust=1668056204630000&"+
-                                "source=images&cd=vfe&ved=0CAwQjRxqFwoTCLiSjt6noPsCFQAAAAAdAAAAABBx",
-                        IsValid=true,
+                                ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwnnNTq0ReeB8PmhEqEUHusI9fQPqahEybcQ&usqp=CAU",
+                                IsValid=true,
                          ModifiedOn=DateTime.Now
                 },
-
+                new BillLading()
+                {
+                    Id = 3,
+                     Mass=344423.879M,
+                      GrossStandardVolume=93768.876M,
+                       CreatedOn=DateTime.Now,
+                        WriterUserId="6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                           FuelDispenserId=1,
+                            DistributionChannelId=3,
+                             ProductId=3,
+                              PurposeId=3,
+                               VehicleId=3,
+                                ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyEOLtQgfY1cO9HOE9ykg0r1rA-GGM2Fd0yQ&usqp=CAU",
+                                IsValid=true,
+                         ModifiedOn=DateTime.Now
+                },
                
                  };
 

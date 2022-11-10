@@ -33,7 +33,6 @@ namespace ExpeditionFuelsHub.Core.Services
         public async Task<bool> ExistsById(string userId)
         {
             return await context.FuelDispensers.AnyAsync(a => a.UserId == userId);
-               // .AnyAsync(a => a.UserId == userId);
         }
 
         //public async Task<bool> UserHasRents(string userId)

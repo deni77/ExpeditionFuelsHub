@@ -54,7 +54,8 @@ namespace ExpeditionFuelsHub.Controllers
             {
                TempData[MessageConstant.ErrorMessage] = "Телефона вече съществува";
 
-                return RedirectToAction("Index", "Home");
+                // return RedirectToAction("Index", "Home");
+                return View(model);
             }
 
             //if (await service.UserHasRents(userId))

@@ -1,4 +1,4 @@
-﻿using ExpeditionFuelsHub.Models.BillLading;
+﻿using ExpeditionFuelsHub.Core.Models.BillLading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

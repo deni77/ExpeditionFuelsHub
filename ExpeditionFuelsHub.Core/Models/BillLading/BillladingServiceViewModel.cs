@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExpeditionFuelsHub.Models.BillLading
+namespace ExpeditionFuelsHub.Core.Models.BillLading
 {
     public class BillladingServiceViewModel
     {

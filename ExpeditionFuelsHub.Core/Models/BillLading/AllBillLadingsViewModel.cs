@@ -1,4 +1,4 @@
-﻿namespace ExpeditionFuelsHub.Models.BillLading
+﻿namespace ExpeditionFuelsHub.Core.Models.BillLading
 {
     public class AllBillLadingsViewModel
     {

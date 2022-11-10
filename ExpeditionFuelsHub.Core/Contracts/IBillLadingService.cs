@@ -1,6 +1,6 @@
-﻿using ExpeditionFuelsHub.Models.BillLading;
+﻿using ExpeditionFuelsHub.Core.Models.BillLading;
 
-namespace ExpeditionFuelsHub.Contracts
+namespace ExpeditionFuelsHub.Core.Contracts
 {
     public interface IBillLadingService
     {

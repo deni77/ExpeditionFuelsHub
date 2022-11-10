@@ -1,8 +1,8 @@
-﻿using ExpeditionFuelsHub.Contracts;
+﻿using ExpeditionFuelsHub.Core.Contracts;
 using ExpeditionFuelsHub.Infrastructure.Data.Entities;
 using ExpeditionFuelsHub.Infrastrucure.Data;
 using ExpeditionFuelsHub.Models;
-using ExpeditionFuelsHub.Models.Home;
+using ExpeditionFuelsHub.Core.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

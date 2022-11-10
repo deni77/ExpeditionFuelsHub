@@ -1,4 +1,4 @@
-﻿using ExpeditionFuelsHub.Models.FDispenser;
+﻿using ExpeditionFuelsHub.Core.Models.FDispenser;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

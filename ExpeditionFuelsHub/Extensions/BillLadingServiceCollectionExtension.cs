@@ -1,4 +1,4 @@
-﻿using ExpeditionFuelsHub.Contracts;
+﻿using ExpeditionFuelsHub.Core.Contracts;
 using ExpeditionFuelsHub.Services;
 
 namespace Microsoft.Extensions.DependencyInjection

@@ -1,5 +1,4 @@
-﻿
-using ExpeditionFuelsHub.Core.Contracts;
+﻿using ExpeditionFuelsHub.Core.Contracts;
 using ExpeditionFuelsHub.Infrastrucure.Data;
 using ExpeditionFuelsHub.Core.Models.BillLading;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +32,5 @@ namespace ExpeditionFuelsHub.Services
             })
                 .Take(3);
         }
-
-        
     }
 }

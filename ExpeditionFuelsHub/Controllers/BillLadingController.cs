@@ -43,7 +43,7 @@ namespace ExpeditionFuelsHub.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, AddBillLadingViewModel model)
         {
-            return RedirectToAction(nameof(Details), new { id  });// id="1"
+            return  RedirectToAction(nameof(Details), new { id  });// id="1"
         }
 
         // public IActionResult Delete(int id)

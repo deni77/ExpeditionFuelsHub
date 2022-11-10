@@ -1,4 +1,5 @@
 ﻿using ExpeditionFuelsHub.Core.Contracts;
+using ExpeditionFuelsHub.Core.Services;
 using ExpeditionFuelsHub.Services;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -9,6 +10,8 @@ namespace Microsoft.Extensions.DependencyInjection
          public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IBillLadingService, BillLadingService>();
+
+              services.AddScoped<IFDispenserService, FdispenserService>();
             
             return services;
         }

@@ -1,0 +1,81 @@
+﻿@model AddBillLadingViewModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="ImageUrl...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedOn"></label>
+                <input asp-for="CreatedOn" class="form-control" placeholder="CreatedOn...">
+                <span asp-validation-for="CreatedOn" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrossStandartVolume"></label>
+                <input asp-for="GrossStandartVolume" class="form-control">
+                <span asp-validation-for="GrossStandartVolume" class="small text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Mass"></label>
+                <input asp-for="Mass" class="form-control">
+                <span asp-validation-for="Mass" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your fine URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="DistributionChanelId"></label>
+                <select asp-for="DistributionChanelId" class="form-control">
+                    @foreach (var chanel in Model.BillsDistributions)
+                    {
+                            <option value="@chanel.Id">@chanel.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="DistributionChanelId" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductId"></label>
+                <select asp-for="ProductId" class="form-control">
+                    @foreach (var product in Model.BillsProducts)
+                    {
+                        <option value="@product.Id">@product.FullName</option>
+                    }
+                </select>
+                <span asp-validation-for="ProductId" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PurposeId"></label>
+                <select asp-for="PurposeId" class="form-control">
+                    @foreach (var purpose in Model.BillsPurposes)
+                    {
+                                    <option value="@purpose.Id">@purpose.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="PurposeId" class="small text-danger"></span>
+            </div>
+
+             <div class="form-group">
+                <label asp-for="VehicleId"></label>
+                <select asp-for="VehicleId" class="form-control">
+                    @foreach (var vehicle in Model.BillsVehicles)
+                    {
+                                     <option value="@vehicle.Id">@vehicle.VehicleRegistrationDocumentNumber</option>
+                    }
+                </select>
+                <span asp-validation-for="VehicleId" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

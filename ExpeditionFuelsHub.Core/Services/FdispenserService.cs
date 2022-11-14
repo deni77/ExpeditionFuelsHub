@@ -41,6 +41,12 @@ namespace ExpeditionFuelsHub.Core.Services
         //        .AnyAsync(h => h.RenterId == userId);
         //}
 
+          public async Task<int> GetfDispecherId(string userId)
+        {
+            return (await context.FuelDispensers
+                .FirstOrDefaultAsync(a => a.UserId == userId))?.Id ?? 0;
+        }
+
         public async Task<bool> UserWithPhoneNumberExists(string phoneNumber)
         {
             return await context.FuelDispensers

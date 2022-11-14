@@ -21,7 +21,7 @@ namespace ExpeditionFuelsHub.Controllers
         {
             if (await service.ExistsById(User.Id()))
             {
-                TempData[MessageConstant.ErrorMessage] = "Вие вече сте Агент";
+                TempData[MessageConstant.ErrorMessage] = "Вие вече сте Стоковед !";
 
                 return RedirectToAction("Index", "Home");
             }
@@ -44,7 +44,7 @@ namespace ExpeditionFuelsHub.Controllers
 
             if (await service.ExistsById(userId))
             {
-                TempData[MessageConstant.ErrorMessage] = "Вие вече сте Агент";
+                TempData[MessageConstant.ErrorMessage] = "Вие вече сте Стоковед !";
                // ModelState.AddModelError();
 
                 return RedirectToAction("Index", "Home");

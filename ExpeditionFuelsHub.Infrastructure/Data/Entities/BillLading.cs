@@ -18,7 +18,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Entities
         public DateTime CreatedOn  { get; set; }
 
         [Required]
-          public string ImageUrl  { get; set; }
+          public string ImageUrl  { get; set; }= null!;
 
         [Required]
          [Precision(18,3)]
@@ -32,32 +32,32 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Entities
         public int ProductId { get; set; }
 
          [ForeignKey(nameof(ProductId))]
-        public Product Product { get; init; }
+        public Product Product { get; init; }= null!;
 
         [Required]
          public int PurposeId { get; set; }
 
          [ForeignKey(nameof(PurposeId))]
-        public Purpose Purpose { get; init; }
+        public Purpose Purpose { get; init; }= null!;
 
         [Required]
          public int DistributionChannelId { get; set; }
 
          [ForeignKey(nameof(DistributionChannelId))]
-        public DistributionChannel DistributionChannel { get; set; }
+        public DistributionChannel DistributionChannel { get; set; }= null!;
 
         [Required]
          public int VehicleId { get; set; }
 
          [ForeignKey(nameof(VehicleId))]
-        public Vehicle Vehicle { get; init; }
+        public Vehicle Vehicle { get; init; }= null!;
 
        
         [Required]
          public int FuelDispenserId { get; set; }
 
          [ForeignKey(nameof(FuelDispenserId))]
-        public FuelDispenser FuelDispenser { get; init; }
+        public FuelDispenser FuelDispenser { get; init; }= null!;
 
         public bool IsValid { get; set; }
 

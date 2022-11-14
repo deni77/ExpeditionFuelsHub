@@ -12,14 +12,14 @@ namespace ExpeditionFuelsHub.Infrastrucure.Data
         {
         }
 
-        public DbSet<BillLading> BillLadings { get; set; }
+        public DbSet<BillLading> BillLadings { get; set; } = null!;
 
-        public DbSet<DistributionChannel> DistributionChannels { get; set; }
-        public DbSet<FuelDispenser> FuelDispensers { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Purpose> Purposes { get; set; }
+        public DbSet<DistributionChannel> DistributionChannels { get; set; }= null!;
+        public DbSet<FuelDispenser> FuelDispensers { get; set; }= null!;
+        public DbSet<Product> Products { get; set; }= null!;
+        public DbSet<Purpose> Purposes { get; set; }= null!;
 
-        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }= null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

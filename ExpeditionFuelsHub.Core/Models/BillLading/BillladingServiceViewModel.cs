@@ -9,10 +9,10 @@ namespace ExpeditionFuelsHub.Core.Models.BillLading
 
          public decimal GrossStandardVolume { get; init; }
 
-         public string Vehicle { get; init; }
+         public string Vehicle { get; init; }= null!;
 
-          public string Product { get; init; }
+          public string Product { get; init; }= null!;
 
-        public string ImageUrl  { get; init; }
+        public string ImageUrl  { get; init; }= null!;
     }
 }

@@ -2,6 +2,7 @@
 using ExpeditionFuelsHub.Core.Contracts;
 using ExpeditionFuelsHub.Infrastrucure;
 using ExpeditionFuelsHub.Infrastrucure.Data;
+using ExpeditionFuelsHub.ModelBinders;
 using ExpeditionFuelsHub.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddMvcOptions(options =>
+    {
+        options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+    });;
 
 //services
 //builder.Services.AddTransient<IBillLadingService, BillLadingService>(); // be6e AddScoped

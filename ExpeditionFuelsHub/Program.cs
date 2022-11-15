@@ -22,7 +22,20 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireDigit = false;
     options.Password.RequireUppercase = false;
     })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+      .AddRoles<IdentityRole>()
+      .AddRoleManager<RoleManager<IdentityRole>>()
+      .AddDefaultTokenProviders()
+        .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+builder.Services.ConfigureApplicationCookie(options => 
+{
+    options.LoginPath = "/User/Login";
+    options.LogoutPath = "/User/Logout";
+});
+
+
+
 
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>

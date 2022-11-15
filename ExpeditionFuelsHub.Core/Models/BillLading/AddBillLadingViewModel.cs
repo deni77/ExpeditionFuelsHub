@@ -11,15 +11,15 @@ namespace ExpeditionFuelsHub.Core.Models.BillLading
 
         [Required]
         [Display(Name = "Gross Standart Volume")]
-        [Range(0.00, 1000000.00, ErrorMessage = "Gross Standart Volume must be a positive number and less than {2}. ")]
+        [Range(0.01, 1000000.00, ErrorMessage = "Gross Standart Volume must be greater than 0.00 and less than {2}. ")]
         public decimal GrossStandartVolume { get; set; }
 
          [Required]
-        [Range(0.00, 10000000.00, ErrorMessage = "Mass must be a positive number and less than {2}. ")]
+        [Range(0.01, 10000000.00, ErrorMessage = "Mass must be be greater than 0.00 and less than {2}. ")]
         public decimal Mass { get; set; }
 
         [Required]
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
 
         [Display(Name = "Distribution Chanel")]

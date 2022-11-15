@@ -1,11 +1,13 @@
 ﻿using ExpeditionFuelsHub.Infrastructure.Data.Configuration;
 using ExpeditionFuelsHub.Infrastructure.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpeditionFuelsHub.Infrastrucure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser> //, 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

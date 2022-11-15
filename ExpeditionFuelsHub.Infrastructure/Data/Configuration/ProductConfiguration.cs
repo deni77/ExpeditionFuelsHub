@@ -23,35 +23,28 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                 new Product()
                 {
                     Id = 1,
-                     FullName="А-95Н",
-                      ProductCode="552",
-                        IsValid=true,
-                         ModifiedOn=DateTime.Now
+                     FullName="Биодизел",
+                      ProductCode=100
                 },
                  new Product()
                 {
                     Id = 2,
-                     FullName="А-95НВ",
-                      ProductCode="101",
-                        IsValid=true,
-                         ModifiedOn=DateTime.Now
+                     FullName="Авт.бензин А-100Н-9%Биоетанол",
+                      ProductCode=200
                 },
 
                  new Product()
                 {
                     Id = 3,
                      FullName="А-98 ЕКТО",
-                      ProductCode="102",
-                        IsValid=true,
-                         ModifiedOn=DateTime.Now
+                      ProductCode=300
+                       
                 },
                    new Product()
                 {
                     Id = 4,
                      FullName="А-98 Н1",
-                      ProductCode="105",
-                        IsValid=true,
-                         ModifiedOn=DateTime.Now
+                      ProductCode=400
                 },
           };
 

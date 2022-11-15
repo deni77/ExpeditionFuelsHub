@@ -26,15 +26,12 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                      Mass=3423.879M,
                       GrossStandardVolume=9768.876M,
                        CreatedOn=DateTime.Now,
-                        WriterUserId="6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                           FuelDispenserId=1,
+                          FuelDispenserId=1,
                             DistributionChannelId=1,
                              ProductId=1,
                               PurposeId=1,
                                VehicleId=1,
-                                ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGHWB3llPsds5z8yK2Ao6aOe0eN2-mATIz0A&usqp=CAU",
-                                IsValid=true,
-                         ModifiedOn=DateTime.Now
+                                ImageUrl="https://i.trade-cloud.com.cn/upload/6653/image/20211230/2_182318.jpg"
                 },
                 new BillLading()
                 {
@@ -42,15 +39,12 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                      Mass=34453423.879M,
                       GrossStandardVolume=9345768.876M,
                        CreatedOn=DateTime.Now,
-                        WriterUserId="6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                           FuelDispenserId=1,
-                            DistributionChannelId=2,
-                             ProductId=2,
-                              PurposeId=2,
-                               VehicleId=2,
-                                ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwnnNTq0ReeB8PmhEqEUHusI9fQPqahEybcQ&usqp=CAU",
-                                IsValid=true,
-                         ModifiedOn=DateTime.Now
+                        FuelDispenserId=1,
+                        DistributionChannelId=2,
+                        ProductId=2,
+                        PurposeId=2,
+                        VehicleId=1,
+                        ImageUrl="https://autoline.bg/img/s/vlekach-MAN-TGS-18-400---1598979707951979529_big--20090119595756984600.jpg"
                 },
                 new BillLading()
                 {
@@ -58,16 +52,13 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                      Mass=344423.879M,
                       GrossStandardVolume=93768.876M,
                        CreatedOn=DateTime.Now,
-                        WriterUserId="6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                           FuelDispenserId=1,
-                            DistributionChannelId=3,
-                             ProductId=3,
-                              PurposeId=3,
-                               VehicleId=3,
-                                ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyEOLtQgfY1cO9HOE9ykg0r1rA-GGM2Fd0yQ&usqp=CAU",
-                                IsValid=true,
-                         ModifiedOn=DateTime.Now
-                },
+                        FuelDispenserId=1,
+                        DistributionChannelId=3,
+                        ProductId=3,
+                        PurposeId=3,
+                        VehicleId=3,
+                        ImageUrl="https://bg.csc-trucks.com/uploads/202221798/foton-10-000-liters-oil-tank-truck23496909900.jpg"
+                 },
                
                  };
 

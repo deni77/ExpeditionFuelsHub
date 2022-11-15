@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExpeditionFuelsHub.Infrastructure.Migrations
 {
-    public partial class addFieldImageUrlPlusAllTables : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,9 +54,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    IsValid = table.Column<bool>(type: "bit", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,10 +67,8 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ProductCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IsValid = table.Column<bool>(type: "bit", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    FullName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    ProductCode = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,9 +81,8 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Code = table.Column<byte>(type: "tinyint", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Code = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,10 +95,8 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    VehicleRegistrationDocumentNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    RegistrationNumber = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
-                    IsValid = table.Column<bool>(type: "bit", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    VehicleRegistrationDocumentNumber = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -250,19 +243,11 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                     PurposeId = table.Column<int>(type: "int", nullable: false),
                     DistributionChannelId = table.Column<int>(type: "int", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false),
-                    FuelDispenserId = table.Column<int>(type: "int", nullable: false),
-                    IsValid = table.Column<bool>(type: "bit", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    WriterUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    FuelDispenserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BillLadings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BillLadings_AspNetUsers_WriterUserId",
-                        column: x => x.WriterUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_BillLadings_DistributionChannels_DistributionChannelId",
                         column: x => x.DistributionChannelId,
@@ -300,50 +285,50 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "2910cf79-a9ad-40d7-a83c-1ae4d2222889", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEOz55s+UPoFWIFGBi7xjD9K2XfF/SkOOBEwPh59qhSgzc73iYUUOyaB0rzpbj7n0LQ==", null, false, "3b8e95ff-ed9d-44d2-96de-cbef5ecca41d", false, "guest@mail.com" },
-                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "3aac5932-bfa5-4b12-ad3d-6c8650378210", "fdispenser@mail.com", false, false, null, "fdispenser@mail.com", "fdispenser@mail.com", "AQAAAAEAACcQAAAAEH2VB4W0WDcaCXNNuibtmI3tKdQ1IKjkPgCtAunYAq+5A9ke0uXQqckbr8Vq97P9ow==", null, false, "e984af6e-5864-49ee-b0b1-67e6b34cd0ee", false, "fdispenser@mail.com" }
+                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "01fa30aa-e075-4266-822c-92e24749d51d", "guest@mail.com", false, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAED53IfcR7m34qjcTJV7NbY4yVGmnPEwF5Ho9PXgg+EDZ++2SMdeXTTozQwfrdyXpQw==", null, false, "33f93673-21df-4fd3-a164-9e0dd764efa8", false, "guest@mail.com" },
+                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "e3f9facc-55e6-4ca0-8098-8163514163e9", "fdispenser@mail.com", false, false, null, "fdispenser@mail.com", "fdispenser@mail.com", "AQAAAAEAACcQAAAAEAMU3IJ2nS0z6LVUZIGIt6tMm5ZNpTGJ/2JaFt0uByxorRybbfNBMViB/21ylCJlLQ==", null, false, "5b7d3de6-e9c6-4d40-87ca-bdf66d201934", false, "fdispenser@mail.com" }
                 });
 
             migrationBuilder.InsertData(
                 table: "DistributionChannels",
-                columns: new[] { "Id", "IsValid", "ModifiedOn", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4757), "DistributionChannel_1" },
-                    { 2, true, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4765), "DistributionChannel_2" },
-                    { 3, true, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4767), "DistributionChannel_3" },
-                    { 4, true, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4769), "DistributionChannel_4" }
+                    { 1, "For Country" },
+                    { 2, "EU" },
+                    { 3, "Export" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "FullName", "IsValid", "ModifiedOn", "ProductCode" },
+                columns: new[] { "Id", "FullName", "ProductCode" },
                 values: new object[,]
                 {
-                    { 1, "А-95Н", true, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4009), "552" },
-                    { 2, "А-95НВ", true, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4185), "101" },
-                    { 3, "А-98 ЕКТО", true, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4189), "102" },
-                    { 4, "А-98 Н1", true, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4192), "105" }
+                    { 1, "Биодизел", 100 },
+                    { 2, "Авт.бензин А-100Н-9%Биоетанол", 200 },
+                    { 3, "А-98 ЕКТО", 300 },
+                    { 4, "А-98 Н1", 400 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Purposes",
-                columns: new[] { "Id", "Code", "ModifiedOn", "Name" },
+                columns: new[] { "Id", "Code", "Name" },
                 values: new object[,]
                 {
-                    { 1, (byte)65, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4515), "ForCountry" },
-                    { 2, (byte)66, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4527), "ForCountry_1" },
-                    { 3, (byte)64, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4529), "ForCountry_3" },
-                    { 4, (byte)67, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4532), "ForCountry_4" }
+                    { 1, 11, "Отложен акциз - до данъчен склад в страната" },
+                    { 2, 710, "Съдържащи биоетанол" },
+                    { 3, 700, "Съдържащи биодизел" },
+                    { 4, 400, "Крайни потребители" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "Id", "IsValid", "ModifiedOn", "RegistrationNumber", "VehicleRegistrationDocumentNumber" },
+                columns: new[] { "Id", "RegistrationNumber", "VehicleRegistrationDocumentNumber" },
                 values: new object[,]
                 {
-                    { 1, false, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4649), "AV9876BH", "ACF4566ASSSS" },
-                    { 2, false, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4658), "BB9876aa", "ACF4566ASSSSFGR" }
+                    { 1, "AV9876BH", "ACF4566AS" },
+                    { 2, "BB9876АА", "GFR768987" },
+                    { 3, "AB4576АC", "DFR400987" }
                 });
 
             migrationBuilder.InsertData(
@@ -353,8 +338,18 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "BillLadings",
-                columns: new[] { "Id", "CreatedOn", "DistributionChannelId", "FuelDispenserId", "GrossStandardVolume", "ImageUrl", "IsValid", "Mass", "ModifiedOn", "ProductId", "PurposeId", "VehicleId", "WriterUserId" },
-                values: new object[] { 1, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4883), 1, 1, 9768.876m, "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Flading&psig=AOvVaw2tUOG-Jc5wN3urHQQoahJ7&ust=1668056204630000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCLiSjt6noPsCFQAAAAAdAAAAABBx", true, 3423.879m, new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4890), 2, 2, 2, "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e" });
+                columns: new[] { "Id", "CreatedOn", "DistributionChannelId", "FuelDispenserId", "GrossStandardVolume", "ImageUrl", "Mass", "ProductId", "PurposeId", "VehicleId" },
+                values: new object[] { 1, new DateTime(2022, 11, 15, 10, 3, 8, 390, DateTimeKind.Local).AddTicks(3542), 1, 1, 9768.876m, "https://i.trade-cloud.com.cn/upload/6653/image/20211230/2_182318.jpg", 3423.879m, 1, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "BillLadings",
+                columns: new[] { "Id", "CreatedOn", "DistributionChannelId", "FuelDispenserId", "GrossStandardVolume", "ImageUrl", "Mass", "ProductId", "PurposeId", "VehicleId" },
+                values: new object[] { 2, new DateTime(2022, 11, 15, 10, 3, 8, 390, DateTimeKind.Local).AddTicks(3593), 2, 1, 9345768.876m, "https://autoline.bg/img/s/vlekach-MAN-TGS-18-400---1598979707951979529_big--20090119595756984600.jpg", 34453423.879m, 2, 2, 1 });
+
+            migrationBuilder.InsertData(
+                table: "BillLadings",
+                columns: new[] { "Id", "CreatedOn", "DistributionChannelId", "FuelDispenserId", "GrossStandardVolume", "ImageUrl", "Mass", "ProductId", "PurposeId", "VehicleId" },
+                values: new object[] { 3, new DateTime(2022, 11, 15, 10, 3, 8, 390, DateTimeKind.Local).AddTicks(3599), 3, 1, 93768.876m, "https://bg.csc-trucks.com/uploads/202221798/foton-10-000-liters-oil-tank-truck23496909900.jpg", 344423.879m, 3, 3, 3 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -419,11 +414,6 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                 name: "IX_BillLadings_VehicleId",
                 table: "BillLadings",
                 column: "VehicleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BillLadings_WriterUserId",
-                table: "BillLadings",
-                column: "WriterUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FuelDispensers_UserId",

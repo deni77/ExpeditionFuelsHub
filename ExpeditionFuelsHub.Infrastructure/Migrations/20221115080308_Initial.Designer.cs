@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpeditionFuelsHub.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221109051058_addFieldImageUrlPlusAllTables")]
-    partial class addFieldImageUrlPlusAllTables
+    [Migration("20221115080308_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,15 +49,9 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsValid")
-                        .HasColumnType("bit");
-
                     b.Property<decimal>("Mass")
                         .HasPrecision(18, 3)
                         .HasColumnType("decimal(18,3)");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -67,9 +61,6 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("WriterUserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -83,26 +74,47 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.HasIndex("WriterUserId");
-
                     b.ToTable("BillLadings");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4883),
+                            CreatedOn = new DateTime(2022, 11, 15, 10, 3, 8, 390, DateTimeKind.Local).AddTicks(3542),
                             DistributionChannelId = 1,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 9768.876m,
-                            ImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Flading&psig=AOvVaw2tUOG-Jc5wN3urHQQoahJ7&ust=1668056204630000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCLiSjt6noPsCFQAAAAAdAAAAABBx",
-                            IsValid = true,
+                            ImageUrl = "https://i.trade-cloud.com.cn/upload/6653/image/20211230/2_182318.jpg",
                             Mass = 3423.879m,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4890),
+                            ProductId = 1,
+                            PurposeId = 1,
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedOn = new DateTime(2022, 11, 15, 10, 3, 8, 390, DateTimeKind.Local).AddTicks(3593),
+                            DistributionChannelId = 2,
+                            FuelDispenserId = 1,
+                            GrossStandardVolume = 9345768.876m,
+                            ImageUrl = "https://autoline.bg/img/s/vlekach-MAN-TGS-18-400---1598979707951979529_big--20090119595756984600.jpg",
+                            Mass = 34453423.879m,
                             ProductId = 2,
                             PurposeId = 2,
-                            VehicleId = 2,
-                            WriterUserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedOn = new DateTime(2022, 11, 15, 10, 3, 8, 390, DateTimeKind.Local).AddTicks(3599),
+                            DistributionChannelId = 3,
+                            FuelDispenserId = 1,
+                            GrossStandardVolume = 93768.876m,
+                            ImageUrl = "https://bg.csc-trucks.com/uploads/202221798/foton-10-000-liters-oil-tank-truck23496909900.jpg",
+                            Mass = 344423.879m,
+                            ProductId = 3,
+                            PurposeId = 3,
+                            VehicleId = 3
                         });
                 });
 
@@ -114,16 +126,10 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("IsValid")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
@@ -133,30 +139,17 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4757),
-                            Name = "DistributionChannel_1"
+                            Name = "For Country"
                         },
                         new
                         {
                             Id = 2,
-                            IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4765),
-                            Name = "DistributionChannel_2"
+                            Name = "EU"
                         },
                         new
                         {
                             Id = 3,
-                            IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4767),
-                            Name = "DistributionChannel_3"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4769),
-                            Name = "DistributionChannel_4"
+                            Name = "Export"
                         });
                 });
 
@@ -202,19 +195,11 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
-                    b.Property<bool>("IsValid")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ProductCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("ProductCode")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -224,34 +209,26 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            FullName = "А-95Н",
-                            IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4009),
-                            ProductCode = "552"
+                            FullName = "Биодизел",
+                            ProductCode = 100
                         },
                         new
                         {
                             Id = 2,
-                            FullName = "А-95НВ",
-                            IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4185),
-                            ProductCode = "101"
+                            FullName = "Авт.бензин А-100Н-9%Биоетанол",
+                            ProductCode = 200
                         },
                         new
                         {
                             Id = 3,
                             FullName = "А-98 ЕКТО",
-                            IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4189),
-                            ProductCode = "102"
+                            ProductCode = 300
                         },
                         new
                         {
                             Id = 4,
                             FullName = "А-98 Н1",
-                            IsValid = true,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4192),
-                            ProductCode = "105"
+                            ProductCode = 400
                         });
                 });
 
@@ -263,16 +240,13 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<byte>("Code")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.HasKey("Id");
 
@@ -282,30 +256,26 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Code = (byte)65,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4515),
-                            Name = "ForCountry"
+                            Code = 11,
+                            Name = "Отложен акциз - до данъчен склад в страната"
                         },
                         new
                         {
                             Id = 2,
-                            Code = (byte)66,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4527),
-                            Name = "ForCountry_1"
+                            Code = 710,
+                            Name = "Съдържащи биоетанол"
                         },
                         new
                         {
                             Id = 3,
-                            Code = (byte)64,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4529),
-                            Name = "ForCountry_3"
+                            Code = 700,
+                            Name = "Съдържащи биодизел"
                         },
                         new
                         {
                             Id = 4,
-                            Code = (byte)67,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4532),
-                            Name = "ForCountry_4"
+                            Code = 400,
+                            Name = "Крайни потребители"
                         });
                 });
 
@@ -317,12 +287,6 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("IsValid")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
                         .HasMaxLength(8)
@@ -330,8 +294,8 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
                     b.Property<string>("VehicleRegistrationDocumentNumber")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.HasKey("Id");
 
@@ -341,18 +305,20 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            IsValid = false,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4649),
                             RegistrationNumber = "AV9876BH",
-                            VehicleRegistrationDocumentNumber = "ACF4566ASSSS"
+                            VehicleRegistrationDocumentNumber = "ACF4566AS"
                         },
                         new
                         {
                             Id = 2,
-                            IsValid = false,
-                            ModifiedOn = new DateTime(2022, 11, 9, 7, 10, 58, 73, DateTimeKind.Local).AddTicks(4658),
-                            RegistrationNumber = "BB9876aa",
-                            VehicleRegistrationDocumentNumber = "ACF4566ASSSSFGR"
+                            RegistrationNumber = "BB9876АА",
+                            VehicleRegistrationDocumentNumber = "GFR768987"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            RegistrationNumber = "AB4576АC",
+                            VehicleRegistrationDocumentNumber = "DFR400987"
                         });
                 });
 
@@ -477,15 +443,15 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3aac5932-bfa5-4b12-ad3d-6c8650378210",
+                            ConcurrencyStamp = "e3f9facc-55e6-4ca0-8098-8163514163e9",
                             Email = "fdispenser@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "fdispenser@mail.com",
                             NormalizedUserName = "fdispenser@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH2VB4W0WDcaCXNNuibtmI3tKdQ1IKjkPgCtAunYAq+5A9ke0uXQqckbr8Vq97P9ow==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAMU3IJ2nS0z6LVUZIGIt6tMm5ZNpTGJ/2JaFt0uByxorRybbfNBMViB/21ylCJlLQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e984af6e-5864-49ee-b0b1-67e6b34cd0ee",
+                            SecurityStamp = "5b7d3de6-e9c6-4d40-87ca-bdf66d201934",
                             TwoFactorEnabled = false,
                             UserName = "fdispenser@mail.com"
                         },
@@ -493,15 +459,15 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2910cf79-a9ad-40d7-a83c-1ae4d2222889",
+                            ConcurrencyStamp = "01fa30aa-e075-4266-822c-92e24749d51d",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOz55s+UPoFWIFGBi7xjD9K2XfF/SkOOBEwPh59qhSgzc73iYUUOyaB0rzpbj7n0LQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED53IfcR7m34qjcTJV7NbY4yVGmnPEwF5Ho9PXgg+EDZ++2SMdeXTTozQwfrdyXpQw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3b8e95ff-ed9d-44d2-96de-cbef5ecca41d",
+                            SecurityStamp = "33f93673-21df-4fd3-a164-9e0dd764efa8",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -624,10 +590,6 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "WriterUser")
-                        .WithMany()
-                        .HasForeignKey("WriterUserId");
-
                     b.Navigation("DistributionChannel");
 
                     b.Navigation("FuelDispenser");
@@ -637,8 +599,6 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                     b.Navigation("Purpose");
 
                     b.Navigation("Vehicle");
-
-                    b.Navigation("WriterUser");
                 });
 
             modelBuilder.Entity("ExpeditionFuelsHub.Infrastructure.Data.Entities.FuelDispenser", b =>

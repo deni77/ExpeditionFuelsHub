@@ -13,14 +13,10 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(40)]
         public string Name { get; set; }= null!;
 
-        public bool IsValid { get; set; }
-
-        public DateTime ModifiedOn { get; set; }
-
-        public List<BillLading> BillLadings  { get; set; } = new List<BillLading>();
+       public List<BillLading> BillLadings  { get; set; } = new List<BillLading>();
        
     }
 }

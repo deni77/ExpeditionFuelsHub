@@ -3,7 +3,7 @@
 @if (TempData[MessageConstant.ErrorMessage] != null)
 {
         <script>
-            $(function () { toastr.error('@TempData[MessageConstant.ErrorMessage]?.ToString()'); });
+            $(function () { toastr.error('@TempData[MessageConstant.ErrorMessage]?.ToString() ')  });
         </script>
 }
 

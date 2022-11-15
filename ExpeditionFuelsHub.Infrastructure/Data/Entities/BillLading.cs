@@ -59,15 +59,6 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Entities
          [ForeignKey(nameof(FuelDispenserId))]
         public FuelDispenser FuelDispenser { get; init; }= null!;
 
-        public bool IsValid { get; set; }
-
-        public DateTime ModifiedOn { get; set; }
-
-       
-        // ne sym sigurna !!!!!!!!!!!!!!
-        public string? WriterUserId { get; set; } 
-
-        [ForeignKey(nameof(WriterUserId))]
-        public IdentityUser? WriterUser { get; set; }
+            
     }
 }

@@ -23,33 +23,28 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                 new Purpose()
                 {
                     Id = 1,
-                     Name = "ForCountry",
-                      Code=65,
-                      ModifiedOn=DateTime.Now
-                },
+                     Name = "Отложен акциз - до данъчен склад в страната",
+                      Code=11,
+                      },
 
                 new Purpose()
                 {
                     Id = 2,
-                     Name = "ForCountry_1",
-                      Code=66,
-                      ModifiedOn=DateTime.Now
-                },
+                     Name = "Съдържащи биоетанол",
+                      Code=710,
+               },
                 new Purpose()
                 {
                     Id = 3,
-                     Name = "ForCountry_3",
-                      Code=64,
-                      ModifiedOn=DateTime.Now
-                },
+                     Name = "Съдържащи биодизел",
+                      Code=700,
+               },
                 new Purpose()
                 {
                     Id = 4,
-                     Name = "ForCountry_4",
-                      Code=67,
-                      ModifiedOn=DateTime.Now
-                },
-
+                     Name = "Крайни потребители",
+                      Code=400,
+                      },
              };
 
             return places;

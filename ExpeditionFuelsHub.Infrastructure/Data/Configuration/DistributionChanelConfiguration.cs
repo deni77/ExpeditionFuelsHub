@@ -23,33 +23,19 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                 new DistributionChannel()
                 {
                     Id = 1,
-                     Name =     "DistributionChannel_1",
-                        IsValid=true,
-                         ModifiedOn=DateTime.Now
+                     Name =     "For Country"
                 },
 
                 new DistributionChannel()
                 {
                     Id = 2,
-                     Name =     "DistributionChannel_2",
-                        IsValid=true,
-                         ModifiedOn=DateTime.Now
+                     Name =     "EU"
                 },
                  new DistributionChannel()
                 {
                     Id = 3,
-                     Name =     "DistributionChannel_3",
-                        IsValid=true,
-                         ModifiedOn=DateTime.Now
-                },
-                  new DistributionChannel()
-                {
-                    Id = 4,
-                     Name =     "DistributionChannel_4",
-                        IsValid=true,
-                         ModifiedOn=DateTime.Now
-                },
-
+                     Name =     "Export"
+                }
              };
 
             return channels;

@@ -98,19 +98,19 @@ namespace ExpeditionFuelsHub.Controllers
             return RedirectToAction(nameof(Details), new { id });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var model = new AddBillLadingViewModel();
+        //[HttpGet]
+        //public async Task<IActionResult> Edit(int id)
+        //{
+        //    var model = new AddBillLadingViewModel();
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(int id, AddBillLadingViewModel model)
-        {
-            return  RedirectToAction(nameof(Details), new { id  });// id="1"
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(int id, AddBillLadingViewModel model)
+        //{
+        //    return  RedirectToAction(nameof(Details), new { id  });// id="1"
+        //}
 
         // public IActionResult Delete(int id)
         //{

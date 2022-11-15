@@ -24,16 +24,20 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                 {
                     Id = 1,
                       RegistrationNumber="AV9876BH",
-                       VehicleRegistrationDocumentNumber="ACF4566ASSSS",
-                      ModifiedOn=DateTime.Now
-                },
+                       VehicleRegistrationDocumentNumber="ACF4566AS",
+                      },
                  new Vehicle()
                 {
                     Id = 2,
-                      RegistrationNumber="BB9876aa",
-                       VehicleRegistrationDocumentNumber="ACF4566ASSSSFGR",
-                      ModifiedOn=DateTime.Now
-                },
+                      RegistrationNumber="BB9876АА",
+                       VehicleRegistrationDocumentNumber="GFR768987",
+                      },
+                  new Vehicle()
+                {
+                    Id = 3,
+                      RegistrationNumber="AB4576АC",
+                       VehicleRegistrationDocumentNumber="DFR400987",
+                      },
           };
 
             return vehicles;

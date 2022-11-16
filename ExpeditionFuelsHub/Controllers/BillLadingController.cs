@@ -35,6 +35,7 @@ namespace ExpeditionFuelsHub.Controllers
         }
 
         [HttpGet]
+          [Authorize(Roles ="Fdispenser")]
         public async Task<IActionResult> AddAsync()
         {
              if ((await fdispenserService.ExistsById(User.Id())) == false)

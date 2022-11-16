@@ -15,5 +15,7 @@ namespace ExpeditionFuelsHub.Core.Contracts
         Task<bool> UserWithPhoneNumberExists(string phoneNumber);
         
         Task Create(string userId, string phoneNumber);
+
+        Task AddToRoleFDispenser(string userId);
     }
 }

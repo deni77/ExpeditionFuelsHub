@@ -3,6 +3,7 @@ using ExpeditionFuelsHub.Core.Contracts;
 using ExpeditionFuelsHub.Core.Models.FDispenser;
 using ExpeditionFuelsHub.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpeditionFuelsHub.Controllers
@@ -16,6 +17,7 @@ namespace ExpeditionFuelsHub.Controllers
             service = _service;
         }
 
+      
         [HttpGet]
         public async Task<IActionResult> Become()
         {
@@ -58,14 +60,9 @@ namespace ExpeditionFuelsHub.Controllers
                 return View(model);
             }
 
-            //if (await service.UserHasRents(userId))
-            //{
-            //    TempData[MessageConstant.ErrorMessage] = "Не трябва да имате наеми за да станете агент";
-
-            //    return RedirectToAction("Index", "Home");
-            //}
-
             await service.Create(userId, model.PhoneNumber);
+
+            await service.AddToRoleFDispenser(userId);
 
             return RedirectToAction("All", "BillLading");
         }

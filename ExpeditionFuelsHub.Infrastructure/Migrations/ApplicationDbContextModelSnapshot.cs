@@ -78,7 +78,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 11, 15, 15, 40, 18, 291, DateTimeKind.Local).AddTicks(4809),
+                            CreatedOn = new DateTime(2022, 11, 16, 11, 8, 13, 897, DateTimeKind.Local).AddTicks(2945),
                             DistributionChannelId = 1,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 9768.876m,
@@ -91,7 +91,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2022, 11, 15, 15, 40, 18, 291, DateTimeKind.Local).AddTicks(4858),
+                            CreatedOn = new DateTime(2022, 11, 16, 11, 8, 13, 897, DateTimeKind.Local).AddTicks(2993),
                             DistributionChannelId = 2,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 9345768.876m,
@@ -104,7 +104,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2022, 11, 15, 15, 40, 18, 291, DateTimeKind.Local).AddTicks(4861),
+                            CreatedOn = new DateTime(2022, 11, 16, 11, 8, 13, 897, DateTimeKind.Local).AddTicks(2997),
                             DistributionChannelId = 3,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 93768.876m,
@@ -345,6 +345,29 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                            ConcurrencyStamp = "2c346c81-8146-41be-8959-b8c67a44da08",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2787b74e-3c0v-466f-m8af-654d56fd9010",
+                            ConcurrencyStamp = "baedf729-5623-477b-bece-f48cf56a7a94",
+                            Name = "User",
+                            NormalizedName = "User"
+                        },
+                        new
+                        {
+                            Id = "115e174e-5g0e-i46f-86af-458mkifd7210",
+                            ConcurrencyStamp = "97344bfb-48dc-4bc3-acbe-07f62a722cda",
+                            Name = "Fdispenser",
+                            NormalizedName = "FDISPENSER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -439,35 +462,51 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
+                            Id = "87612856-d498-4529-b453-bgrfd8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "108a8e0c-1c8c-41df-9d59-6472a318c862",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEANqBibmX6OuA8DmkHBNanTVmREf/IIoIVvfO8CilTE13khvGwvw6+fitQugkmYfDw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8c380dca-d024-4175-ad79-c0543fbf4d36",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "03b2d06c-a542-4cd8-98af-5d9708183ec3",
+                            ConcurrencyStamp = "c76dc2e3-200a-4107-8fce-861ceaca330a",
                             Email = "fdispenser@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "fdispenser@mail.com",
-                            NormalizedUserName = "fdispenser@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAi/yTmZ4f/aLB+v69A6JEF4h92i+7W2kKvd+t8VRH09KI+Vs9DvE2G4UyM+c587ZQ==",
+                            NormalizedEmail = "FDISPENSER@MAIL.COM",
+                            NormalizedUserName = "FDISPENSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKUclK5lTdp7MVhEuX30TSCYPJxjVZLwnR7yeoCm5QneZfsfuWAbDDEBIQjOv0HytA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2f7ac8c6-7845-4242-a148-7a32425f5aae",
+                            SecurityStamp = "d328f769-4b32-4241-b32a-11c0c38bfd31",
                             TwoFactorEnabled = false,
-                            UserName = "fdispenser@mail.com"
+                            UserName = "fdispenser"
                         },
                         new
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "81b67ad9-2870-401b-9899-982355abd88c",
+                            ConcurrencyStamp = "beea2d36-848d-4821-9bcc-a0f737c12890",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "guest@mail.com",
-                            NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFPnehOSWCAgUHszuQwlz6fH9SfYwNfvsJY8MwK/IWSSP9DivYL2ctaTxUykdujy9A==",
+                            NormalizedEmail = "GUEST@MAIL.COM",
+                            NormalizedUserName = "GUEST",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBvw5vRQuM41wozy8UQmWTykeMv02KXo3xgqQ9Aa/zJsGy5Yp946BXSV8JcJBCszTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b6d8140b-9454-416f-a97c-1cd79fd49095",
+                            SecurityStamp = "ec677a64-6cbb-496e-aeb3-9fd24fac1da4",
                             TwoFactorEnabled = false,
-                            UserName = "guest@mail.com"
+                            UserName = "guest"
                         });
                 });
 
@@ -499,10 +538,12 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -531,6 +572,23 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "87612856-d498-4529-b453-bgrfd8395082",
+                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210"
+                        },
+                        new
+                        {
+                            UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            RoleId = "2787b74e-3c0v-466f-m8af-654d56fd9010"
+                        },
+                        new
+                        {
+                            UserId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            RoleId = "115e174e-5g0e-i46f-86af-458mkifd7210"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -539,10 +597,12 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

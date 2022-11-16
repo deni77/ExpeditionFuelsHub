@@ -78,7 +78,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 11, 16, 11, 8, 13, 897, DateTimeKind.Local).AddTicks(2945),
+                            CreatedOn = new DateTime(2022, 11, 16, 15, 53, 36, 745, DateTimeKind.Local).AddTicks(3731),
                             DistributionChannelId = 1,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 9768.876m,
@@ -91,7 +91,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2022, 11, 16, 11, 8, 13, 897, DateTimeKind.Local).AddTicks(2993),
+                            CreatedOn = new DateTime(2022, 11, 16, 15, 53, 36, 745, DateTimeKind.Local).AddTicks(3783),
                             DistributionChannelId = 2,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 9345768.876m,
@@ -104,7 +104,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2022, 11, 16, 11, 8, 13, 897, DateTimeKind.Local).AddTicks(2997),
+                            CreatedOn = new DateTime(2022, 11, 16, 15, 53, 36, 745, DateTimeKind.Local).AddTicks(3787),
                             DistributionChannelId = 3,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 93768.876m,
@@ -350,21 +350,21 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "2c346c81-8146-41be-8959-b8c67a44da08",
+                            ConcurrencyStamp = "8456c45a-8152-4c3f-8172-031993b5f379",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2787b74e-3c0v-466f-m8af-654d56fd9010",
-                            ConcurrencyStamp = "baedf729-5623-477b-bece-f48cf56a7a94",
+                            ConcurrencyStamp = "272be45b-d50e-49e2-98e9-47c3bbae7ca8",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
                             Id = "115e174e-5g0e-i46f-86af-458mkifd7210",
-                            ConcurrencyStamp = "97344bfb-48dc-4bc3-acbe-07f62a722cda",
+                            ConcurrencyStamp = "61b63ed3-0a43-49c7-9122-b0fa5e8ddb2b",
                             Name = "Fdispenser",
                             NormalizedName = "FDISPENSER"
                         });
@@ -464,15 +464,15 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = "87612856-d498-4529-b453-bgrfd8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "108a8e0c-1c8c-41df-9d59-6472a318c862",
+                            ConcurrencyStamp = "d0c7ffd4-8af8-413d-b706-c02532e92ac3",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEANqBibmX6OuA8DmkHBNanTVmREf/IIoIVvfO8CilTE13khvGwvw6+fitQugkmYfDw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEfc7J/zJ+0EWSLaQYQ7flI0trFSAeam1MaiZ+59UHvkQ2yeY63prmZaY8efsWqh2w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8c380dca-d024-4175-ad79-c0543fbf4d36",
+                            SecurityStamp = "b98dc89c-258f-44b0-92d1-4afe820b7e2a",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -480,15 +480,15 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c76dc2e3-200a-4107-8fce-861ceaca330a",
+                            ConcurrencyStamp = "b0fd29ed-8e85-432f-8f43-9c05acb416d5",
                             Email = "fdispenser@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "FDISPENSER@MAIL.COM",
                             NormalizedUserName = "FDISPENSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKUclK5lTdp7MVhEuX30TSCYPJxjVZLwnR7yeoCm5QneZfsfuWAbDDEBIQjOv0HytA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPnzyPL7Fh3/VRj+Wl7jCEN7TCULBe7xYS0EGeZMWfHS985QsitUvZm+8FxS6UG4Mg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d328f769-4b32-4241-b32a-11c0c38bfd31",
+                            SecurityStamp = "56eeb1bb-ff2b-44f5-9471-6d7e374ca10b",
                             TwoFactorEnabled = false,
                             UserName = "fdispenser"
                         },
@@ -496,15 +496,15 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "beea2d36-848d-4821-9bcc-a0f737c12890",
+                            ConcurrencyStamp = "56d847d3-bb16-4c6b-973b-b570813f2b1e",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBvw5vRQuM41wozy8UQmWTykeMv02KXo3xgqQ9Aa/zJsGy5Yp946BXSV8JcJBCszTQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF6KC4F8pXMBzZG8Vca5/9cf0+NodM2yebuojMhGCT1SssGgFdtRdvYV0OCABjOzFQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ec677a64-6cbb-496e-aeb3-9fd24fac1da4",
+                            SecurityStamp = "deb91edc-0df8-47f1-a89b-dde01defb4c2",
                             TwoFactorEnabled = false,
                             UserName = "guest"
                         });

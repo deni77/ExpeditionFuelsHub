@@ -25,7 +25,7 @@ namespace ExpeditionFuelsHub.Controllers
             {
                 TempData[MessageConstant.ErrorMessage] = "Вие вече сте Стоковед !";
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home",new { area=""} );
             }
 
             var model = new BecomeFDispenserViewModel();
@@ -49,7 +49,7 @@ namespace ExpeditionFuelsHub.Controllers
                 TempData[MessageConstant.ErrorMessage] = "Вие вече сте Стоковед !";
                // ModelState.AddModelError();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home",new { area=""});
             }
 
             if (await service.UserWithPhoneNumberExists(model.PhoneNumber))
@@ -64,7 +64,7 @@ namespace ExpeditionFuelsHub.Controllers
 
             await service.AddToRoleFDispenser(userId);
 
-            return RedirectToAction("All", "BillLading");
+            return RedirectToAction("All", "BillLading",new { area=""});
         }
     }
 }

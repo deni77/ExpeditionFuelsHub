@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ExpeditionFuelsHub.Controllers
+namespace ExpeditionFuelsHub.Areas.Admin.Controllers
 {
     [Authorize]
+    [Area("Admin")]
     public class UserController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -20,13 +21,13 @@ namespace ExpeditionFuelsHub.Controllers
             signInManager = _signInManager;
         }
 
-       [HttpGet]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-               return RedirectToAction("All", "BillLading");
+                return RedirectToAction("All", "BillLading",new { area=""});
             }
 
             var model = new RegisterViewModel();
@@ -57,7 +58,7 @@ namespace ExpeditionFuelsHub.Controllers
              // await signInManager.SignInAsync(user, isPersistent: false);
              // return RedirectToAction("All", "Movies");
 
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Login", "User",new { area="Admin"});
             }
 
             foreach (var err in result.Errors)
@@ -74,8 +75,8 @@ namespace ExpeditionFuelsHub.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-               return RedirectToAction("All", "BillLading");
-              // return RedirectToAction("Index", "Home");
+                return RedirectToAction("All", "BillLading", new { area=""});
+                // return RedirectToAction("Index", "Home");
             }
 
             var model = new LoginViewModel() { };
@@ -99,7 +100,7 @@ namespace ExpeditionFuelsHub.Controllers
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {
-                   return RedirectToAction("All", "BillLading");
+                    return RedirectToAction("All", "BillLading",new { area=""});
                 }
             }
 
@@ -112,7 +113,7 @@ namespace ExpeditionFuelsHub.Controllers
         {
             await signInManager.SignOutAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home",new { area=""});
         }
     }
 }

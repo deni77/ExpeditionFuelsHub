@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExpeditionFuelsHub.Controllers
 {
     [Authorize]
+   
     public class BillLadingController : Controller
     {
         private readonly IBillLadingService service;
@@ -40,7 +41,7 @@ namespace ExpeditionFuelsHub.Controllers
         {
              if ((await fdispenserService.ExistsById(User.Id())) == false)
             {
-                return RedirectToAction(nameof(FDispenserController.Become), "FDispenser");
+                return RedirectToAction(nameof(FDispenserController.Become), "FDispenser",new { area=""});
             }
 
             var model = new AddBillLadingViewModel()
@@ -59,7 +60,7 @@ namespace ExpeditionFuelsHub.Controllers
         {
             if ((await fdispenserService.ExistsById(User.Id())) == false)
             {
-                return RedirectToAction(nameof(FDispenserController.Become), "FDispenser");
+                return RedirectToAction(nameof(FDispenserController.Become), "FDispenser",new { area=""});
             }
 
             if ((await service.DistributionChanelExists(model.DistributionChanelId)) == false)
@@ -96,7 +97,7 @@ namespace ExpeditionFuelsHub.Controllers
 
             int id = await service.Create(model, fDispecherId);
 
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details),new { id } ); //new { id }
         }
 
         //[HttpGet]

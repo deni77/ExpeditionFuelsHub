@@ -3,21 +3,22 @@ using ExpeditionFuelsHub.Infrastrucure.Data;
 using ExpeditionFuelsHub.Core.Models.BillLading;
 using Microsoft.EntityFrameworkCore;
 using ExpeditionFuelsHub.Infrastructure.Data.Entities;
+using ExpeditionFuelsHub.Infrastructure.Data.Common;
 
 namespace ExpeditionFuelsHub.Services
 {
     public class BillLadingService : IBillLadingService
     {
 
-        private readonly ApplicationDbContext context;
-        public BillLadingService(ApplicationDbContext _context)
+        private readonly IRepository repo;
+        public BillLadingService(IRepository _repo)
         {
-            context = _context;
+            repo = _repo;
         }
 
         public async Task<IEnumerable<BillsDistributionChanelModel>> AllDistributionChanels()
         {
-            return await context.DistributionChannels
+            return await repo.AllReadonly<DistributionChannel>()
                 .OrderBy(c => c.Name)
                 .Select(c => new BillsDistributionChanelModel() 
                 {
@@ -29,7 +30,7 @@ namespace ExpeditionFuelsHub.Services
 
         public async Task<IEnumerable<BillsProductModel>> AllProducts()
         {
-            return await context.Products
+            return await repo.AllReadonly<Product>()
                 .OrderBy(c => c.FullName)
                 .Select(c => new BillsProductModel() 
                 {
@@ -41,7 +42,7 @@ namespace ExpeditionFuelsHub.Services
 
         public async Task<IEnumerable<BillsPurposeModel>> AllPurposes()
         {
-            return await context.Purposes
+            return await repo.AllReadonly<Purpose>()
                 .OrderBy(c => c.Name)
                 .Select(c => new BillsPurposeModel() 
                 {
@@ -53,7 +54,7 @@ namespace ExpeditionFuelsHub.Services
 
         public async Task<IEnumerable<BillsVehicleModel>> AllVehicles()
         {
-            return await context.Vehicles
+            return await repo.AllReadonly<Vehicle>()
                 .OrderBy(c => c.RegistrationNumber)
                 .Select(c => new BillsVehicleModel() 
                 {
@@ -78,21 +79,21 @@ namespace ExpeditionFuelsHub.Services
                 FuelDispenserId = fDispecherId
             };
 
-            await context.BillLadings.AddAsync(billLading);
-            await context.SaveChangesAsync();
+            await repo.AddAsync(billLading);
+            await repo.SaveChangesAsync();
 
             return billLading.Id;
         }
 
         public async Task<bool> DistributionChanelExists(int distributionChanelId)
         {
-           return await context.DistributionChannels
+           return await repo.AllReadonly<DistributionChannel>()
                 .AnyAsync(c => c.Id == distributionChanelId);
         }
 
         public async Task<IEnumerable<BillladingServiceViewModel>> GetLastTwoBillLadingAsync()
         {
-            var entities = await this.context.BillLadings
+            var entities = await this.repo.AllReadonly<BillLading>()
                  .Include(g => g.Vehicle)
                  .Include(g => g.Product)
                 .OrderByDescending(x => x.Id).ToListAsync();
@@ -111,19 +112,19 @@ namespace ExpeditionFuelsHub.Services
 
         public async Task<bool> ProductExists(int productId)
         {
-            return await context.Products
+            return await repo.AllReadonly<Product>()
                 .AnyAsync(c => c.Id == productId);
         }
 
         public async Task<bool> PurposeExists(int purposeId)
         {
-           return await context.Purposes
+           return await repo.AllReadonly<Purpose>()
                 .AnyAsync(c => c.Id == purposeId);
         }
 
         public async Task<bool> VehicleExists(int vehicleId)
         {
-             return await context.Vehicles
+             return await repo.AllReadonly<Vehicle>()
                 .AnyAsync(c => c.Id == vehicleId);
         }
     }

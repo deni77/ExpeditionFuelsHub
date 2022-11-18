@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Home Page";
     // var bills = Model.ToList();
-    var first = true;
+    bool first = true;
 }
 
     
@@ -32,24 +32,22 @@
    <p></p>
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        @foreach (var bill in Model)
-            {
-            @*var bill = bills[i];*@
-                    <div class="carousel-item @(first ? "active" : string.Empty)">
-                       
+    @foreach (var bill in Model)
+    {
+                <div class="carousel-item @(first ? "active" : string.Empty)">
+
                     <img class="d-block w-100" style="height:500px"
                     src="@bill.ImageUrl" alt="@bill.GrossStandardVolume">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>
-                            <a class="btn btn-primary" asp-controller="BillLading" asp-action="Details"
-                            asp-route-id="@bill.Id">Продукт: @bill.Product</a>
+                            <a class="btn btn-primary" asp-controller="Houses" asp-action="Details"
+                            asp-route-id="@bill.Id"> @bill.Product</a>
                         </h5>
                     </div>
                 </div>
 
-            @(first = false);
-            
-            }
+        first = false;
+    }
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

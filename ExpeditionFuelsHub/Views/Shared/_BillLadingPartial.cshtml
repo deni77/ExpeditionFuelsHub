@@ -1,0 +1,23 @@
+﻿@model BillLadingServiceModel
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="House Image">
+        <div class="card-body text-center">
+            <h4>@Model.Product</h4>
+           
+            <h6>DistributionChannel: <b>@Model.DistributionChannel</b></h6>
+                      
+            <br />
+            <a asp-area="" asp-controller="BillLading" asp-action="Details" asp-route-id="@Model.Id"
+                            class="btn btn-success">Details</a>
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <a asp-area="" asp-controller="BillLading" asp-action="Edit" asp-route-id="@Model.Id"
+                                        class="btn btn-warning">Edit</a>
+                <a asp-area="" asp-controller="BillLading" asp-action="Delete" asp-route-id="@Model.Id"
+                            class="btn btn-danger">Delete</a>
+            }
+        </div>
+    </div>
+</div>

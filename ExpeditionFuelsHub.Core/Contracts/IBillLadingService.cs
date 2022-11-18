@@ -1,4 +1,6 @@
 ﻿using ExpeditionFuelsHub.Core.Models.BillLading;
+using ExpeditionFuelsHub.Core.Models.BillLading.Service;
+using ExpeditionFuelsHub.Views.BillLading.EnumSorting;
 
 namespace ExpeditionFuelsHub.Core.Contracts
 {
@@ -11,7 +13,15 @@ namespace ExpeditionFuelsHub.Core.Contracts
          Task<IEnumerable<BillsVehicleModel>> AllVehicles();
 
          Task<IEnumerable<BillsPurposeModel>> AllPurposes();
-        Task<IEnumerable<BillladingServiceViewModel>> GetLastTwoBillLadingAsync();
+        Task<IEnumerable<BillLadingServiceViewModel>> GetLastTwoBillLadingAsync();
+        // Task<IEnumerable<BillladingServiceViewModel>> AllBillLadingAsync();
+
+          Task<BillLadingQueryModel> All(
+            string? purpose = null,
+            string? searchTerm = null,
+            Sorting sorting = Sorting.Newest,
+            int currentPage = 1,
+            int housesPerPage = 1);
 
         Task<int> Create(AddBillLadingViewModel model, int fDispecherId);
 
@@ -21,5 +31,8 @@ namespace ExpeditionFuelsHub.Core.Contracts
 
          Task<bool> PurposeExists(int purposeId);
          Task<bool> ProductExists(int productId);
+
+        Task<IEnumerable<string>> AllPurposesNames();
+
     }
 }

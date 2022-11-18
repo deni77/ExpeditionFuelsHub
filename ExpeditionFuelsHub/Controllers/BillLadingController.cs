@@ -1,5 +1,6 @@
 ﻿using ExpeditionFuelsHub.Core.Contracts;
 using ExpeditionFuelsHub.Core.Models.BillLading;
+using ExpeditionFuelsHub.Core.Models.BillLading.Service;
 using ExpeditionFuelsHub.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,15 +20,34 @@ namespace ExpeditionFuelsHub.Controllers
         }
 
 
+        //[AllowAnonymous]
+        //public async Task<IActionResult> All()
+        //{
+        //    var bills=await this.service.AllBillLadingAsync();
+        //    return View(bills);
+        //}
+
+        [HttpGet]
         [AllowAnonymous]
-        public IActionResult All()
+        public async Task<IActionResult> All([FromQuery]AllBillLadingQueryModel query)
         {
-            return View(new AllBillLadingsViewModel());
+            var result = await service.All(
+                query.Purpose,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllBillLadingQueryModel.BillLadingPerPage);
+
+            query.TotalBillLadingCount = result.TotalBillLadingCount;
+           query.Purposes = await service.AllPurposesNames();
+            query.BillLadings = result.BillLadings;
+
+            return View(query);
         }
 
          public IActionResult Mine()
         {
-            return View(new AllBillLadingsViewModel());
+            return View(new AddBillLadingViewModel());
         }
 
          public IActionResult Details(int id)

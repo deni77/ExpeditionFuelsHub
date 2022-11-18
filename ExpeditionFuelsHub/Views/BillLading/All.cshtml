@@ -1,8 +1,100 @@
-﻿@model AllBillLadingsViewModel
+﻿@model AllBillLadingQueryModel
 
 @{
-    ViewData["Title"] = "All billLadings";
+    ViewBag.Title = "All BillLading";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+<form method="get">
+    <div class="row">
+        <div class="form-group col-md-3 d-flex justify-content-between">
+            <div class="form-group">
+                <label asp-for="Purpose"></label>
+                <select asp-for="Purpose" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var purpose in Model.Purposes)
+                    {
+                                    <option value="@purpose">@purpose</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label asp-for="SearchTerm"></label>
+            <input asp-for="SearchTerm" class="form-control" placeholder="...">
+        </div>
+
+        <div class="form-group col-md-3">
+            <div class="form-group">
+                <label asp-for="Sorting"></label>
+                <select asp-for="Sorting" class="form-control">
+                    <option value="0">Newest</option>
+                    <option value="1">Lowest gross standart volume first</option>
+                    </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group mt-4 p-2">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalBillLadingCount /
+        AllBillLadingQueryModel.BillLadingPerPage);
+}
+
+<div class="row mb-5">
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+         asp-area=""  
+            asp-controller="BillLading"
+           asp-action="All"
+           asp-route-currentPage="@previousPage"
+           asp-route-purpose="@Model.Purpose"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)"><<</a>
+    </div>
+
+    @{
+        var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+        !Model.BillLadings.Any();
+    }
+
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary 
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+            asp-area=""
+           asp-controller="BillLading"
+           asp-action="All"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-purpose="@Model.Purpose"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)">>></a>
+    </div>
+</div>
+
+@if (!Model.BillLadings.Any())
+{
+            <h2 class="text-center">No billLadings found by the given criteria!</h2>
+}
+
+<div class="row">
+    @foreach (var bill in Model.BillLadings)
+    {
+                <partial name="_BillLadingPartial" model="@bill" />
+    }
+</div>

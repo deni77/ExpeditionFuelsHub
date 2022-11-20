@@ -65,9 +65,17 @@ namespace ExpeditionFuelsHub.Controllers
             return View(myBillLadings);
         }
 
-         public IActionResult Details(int id)
+        [AllowAnonymous]
+         public async Task<IActionResult> Details(int id)
         {
-            return View(new DetailsBillLadingViewModel());
+           if ((await service.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = await service.BillLadingDetailsById(id);
+
+            return View(model);
         }
 
         [HttpGet]

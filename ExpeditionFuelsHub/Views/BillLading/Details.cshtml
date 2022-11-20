@@ -1,8 +1,46 @@
 ﻿@model DetailsBillLadingViewModel
 
 @{
-    ViewData["Title"] = "Details BillLading";
+    ViewBag.Title = "BillLading Details";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="BillLading Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.GrossStandardVolume</u></p>
+            <p>
+                Created on:
+                <b>@Model.CreatedOn </b>
+            </p>
+            <p>Vehicle: @Model.Vehicle</p>
+             <p>DistributionChanel: @Model.DistributionChannel</p>
+            <p>Purpose: <b>@Model.Purpose</b></p>
+            <p>Product: <b>@Model.Product</b></p>
+           
+            <div class="form-inline">
+                @if (this.User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                   <a class="btn btn-warning" asp-area="" asp-controller="BillLading" asp-action="Edit"
+                       asp-route-id="@Model.Id">Edit</a>
+                       <a class="ml-2 btn btn-danger" asp-area="" asp-controller="BillLading" asp-action="Delete"
+                       asp-route-id="@Model.Id">Delete</a>
+                }
+            </div>
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Fuel Duspenser Info</h5>
+                    <p class="card-text">Email:  @Model.FDispenser.Email</p>
+                    <p class="card-text">Phone Number: @Model.FDispenser.PhoneNumber</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

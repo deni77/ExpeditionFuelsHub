@@ -37,5 +37,9 @@ namespace ExpeditionFuelsHub.Core.Contracts
         // za Mine
          Task<IEnumerable<BillLadingServiceModel>> AllBillLadingsByFDispenserId(int id);
 
+        Task<DetailsBillLadingViewModel> BillLadingDetailsById(int id);
+
+        Task<bool> Exists(int id);
+
           }
 }

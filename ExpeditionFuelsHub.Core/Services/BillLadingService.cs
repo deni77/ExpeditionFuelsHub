@@ -7,6 +7,7 @@ using ExpeditionFuelsHub.Infrastructure.Data.Common;
 using static ExpeditionFuelsHub.Core.Models.BillLading.Service.BillLadingQueryModel;
 using ExpeditionFuelsHub.Views.BillLading.EnumSorting;
 using ExpeditionFuelsHub.Core.Models.BillLading.Service;
+using ExpeditionFuelsHub.Core.Models.FDispenser;
 
 namespace ExpeditionFuelsHub.Services
 {
@@ -236,6 +237,35 @@ namespace ExpeditionFuelsHub.Services
                 .AnyAsync(c => c.Id == vehicleId);
         }
 
-        
+        public async Task<DetailsBillLadingViewModel> BillLadingDetailsById(int id)
+        {
+             return await repo.AllReadonly<BillLading>()
+                //.Where(h => h.IsActive)
+                .Where(h => h.Id == id)
+                .Select(h => new DetailsBillLadingViewModel() 
+                {
+                     DistributionChannel=h.DistributionChannel.Name,
+                      GrossStandardVolume=h.GrossStandardVolume,
+                       Product=h.Product.FullName,
+                        Purpose=h.Purpose.Name,
+                         Vehicle=h.Vehicle.RegistrationNumber,
+                    Id = id,
+                    ImageUrl = h.ImageUrl,
+                     CreatedOn=h.CreatedOn.ToString("dd.MM.yyyy hh:MM:ss"),
+                     FDispenser = new FDispenserServiceModel() 
+                    {
+                        Email = h.FuelDispenser.User.Email,
+                        PhoneNumber = h.FuelDispenser.PhoneNumber
+                    }
+                    
+                })
+                .FirstAsync();
+        }
+
+        public async Task<bool> Exists(int id)
+        {
+            return await repo.AllReadonly<BillLading>()
+                .AnyAsync(h => h.Id == id ); //&& h.IsActive
+        }
     }
 }

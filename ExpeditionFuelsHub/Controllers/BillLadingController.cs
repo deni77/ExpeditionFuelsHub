@@ -31,6 +31,7 @@ namespace ExpeditionFuelsHub.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery]AllBillLadingQueryModel query)
         {
+            TempData["OwnersBill"] = "0";
             var result = await service.All(
                 query.Purpose,
                 query.SearchTerm,
@@ -44,10 +45,24 @@ namespace ExpeditionFuelsHub.Controllers
 
             return View(query);
         }
-
-         public IActionResult Mine()
+        [Authorize(Roles ="Admin,Fdispenser")]
+         public async Task<IActionResult> Mine()
         {
-            return View(new AddBillLadingViewModel());
+            IEnumerable<BillLadingServiceModel> myBillLadings=Enumerable.Empty<BillLadingServiceModel>();;
+            var userId = User.Id();
+
+            if (await fdispenserService.ExistsById(userId))
+            {
+                int fDispenserId = await fdispenserService.GetfDispecherId(userId);
+                myBillLadings = await service.AllBillLadingsByFDispenserId(fDispenserId);
+                TempData["OwnersBill"] = "1";
+            }
+            //else
+            //{
+            //    myBillLadings = await service.AllHousesByUserId(userId);
+            //}
+
+            return View(myBillLadings);
         }
 
          public IActionResult Details(int id)

@@ -13,13 +13,14 @@
             <br />
             <a asp-area="" asp-controller="BillLading" asp-action="Details" asp-route-id="@Model.Id"
                             class="btn btn-success">Details</a>
-            @if (this.User.Identity.IsAuthenticated)
+            @if (this.User.Identity.IsAuthenticated && TempData["OwnersBill"] == "1" ||  TempData["OwnersBill"] == "0" && User.IsInRole("Admin"))
             {
-                <a asp-area="" asp-controller="BillLading" asp-action="Edit" asp-route-id="@Model.Id"
+                   <a asp-area="" asp-controller="BillLading" asp-action="Edit" asp-route-id="@Model.Id"
                                         class="btn btn-warning">Edit</a>
-                <a asp-area="" asp-controller="BillLading" asp-action="Delete" asp-route-id="@Model.Id"
+                        <a asp-area="" asp-controller="BillLading" asp-action="Delete" asp-route-id="@Model.Id"
                             class="btn btn-danger">Delete</a>
-            }
+             }
+           
         </div>
     </div>
 </div>

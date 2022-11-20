@@ -66,7 +66,6 @@ namespace ExpeditionFuelsHub.Services
                     Product=h.Product.FullName,
                     Id = h.Id,
                     ImageUrl = h.ImageUrl,
-                    //IsRented = h.RenterId != null,
                     DistributionChannel=h.DistributionChannel.Name,
                      Purpose=h.Purpose.Name,
                       Vehicle=h.Vehicle.RegistrationNumber,
@@ -108,6 +107,23 @@ namespace ExpeditionFuelsHub.Services
                 {
                     Id = c.Id,
                     Name = c.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<BillLadingServiceModel>> AllBillLadingsByFDispenserId(int id)
+        {
+            return await repo.AllReadonly<BillLading>()
+                  .Where(h => h.FuelDispenserId == id)
+                .Select(h => new BillLadingServiceModel() 
+                {
+                    Product=h.Product.FullName,
+                    Id = h.Id,
+                    ImageUrl = h.ImageUrl,
+                    DistributionChannel=h.DistributionChannel.Name,
+                     Purpose=h.Purpose.Name,
+                      Vehicle=h.Vehicle.RegistrationNumber,
+                       GrossStandardVolume=h.GrossStandardVolume
                 })
                 .ToListAsync();
         }

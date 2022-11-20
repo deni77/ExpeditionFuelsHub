@@ -20,7 +20,7 @@ namespace ExpeditionFuelsHub.Services
         }
 
         public async Task<BillLadingQueryModel> All(string? purpose = null, string? searchTerm = null,
-            Sorting sorting = Sorting.Newest, int currentPage = 1, int billladingPerPage = 1)
+            BillLadingSorting sorting = BillLadingSorting.Newest, int currentPage = 1, int billladingPerPage = 1)
         {
             BillLadingQueryModel result = new BillLadingQueryModel();
             var billLadings = repo.AllReadonly<BillLading>();
@@ -37,8 +37,7 @@ namespace ExpeditionFuelsHub.Services
 
                 billLadings = billLadings
                     .Where(h => EF.Functions.Like(h.DistributionChannel.Name.ToLower(), searchTerm) ||
-                        EF.Functions.Like(h.Vehicle.RegistrationNumber.ToLower(), searchTerm) ||
-                        EF.Functions.Like(h.Product.FullName.ToLower(), searchTerm));
+                         EF.Functions.Like(h.Product.FullName.ToLower(), searchTerm));
             }
 
             //switch (sorting)
@@ -54,11 +53,9 @@ namespace ExpeditionFuelsHub.Services
 
             billLadings = sorting switch
             {
-                Sorting.GrossStandartVolume => billLadings
+                BillLadingSorting.GrossStandartVolume => billLadings
                     .OrderBy(h => h.GrossStandardVolume),
-                Sorting.Newest => billLadings
-                    .OrderBy(h => h.CreatedOn),
-                _ => billLadings.OrderByDescending(h => h.Id)
+               _ => billLadings.OrderByDescending(h => h.Id)
             };
 
            result.BillLadings = await billLadings

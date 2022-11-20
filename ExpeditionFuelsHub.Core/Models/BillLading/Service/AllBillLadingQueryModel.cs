@@ -15,7 +15,7 @@ namespace ExpeditionFuelsHub.Core.Models.BillLading.Service
 
         public string? SearchTerm { get; set; }
 
-        public Sorting Sorting { get; set; } 
+        public BillLadingSorting Sorting { get; set; } 
 
         public int CurrentPage { get; set; } = 1;
 

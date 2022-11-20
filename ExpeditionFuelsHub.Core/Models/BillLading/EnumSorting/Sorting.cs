@@ -1,8 +1,8 @@
 ﻿namespace ExpeditionFuelsHub.Views.BillLading.EnumSorting
 {
-    public enum Sorting
+    public enum BillLadingSorting
     {
          Newest=0,
-        GrossStandartVolume=2
+        GrossStandartVolume=1
     }
 }

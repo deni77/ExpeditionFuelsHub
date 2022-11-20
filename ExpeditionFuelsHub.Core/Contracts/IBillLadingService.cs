@@ -19,7 +19,7 @@ namespace ExpeditionFuelsHub.Core.Contracts
           Task<BillLadingQueryModel> All(
             string? purpose = null,
             string? searchTerm = null,
-            Sorting sorting = Sorting.Newest,
+            BillLadingSorting sorting = BillLadingSorting.Newest,
             int currentPage = 1,
             int housesPerPage = 1);
 

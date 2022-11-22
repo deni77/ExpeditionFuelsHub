@@ -5,6 +5,8 @@ namespace ExpeditionFuelsHub.Core.Models.BillLading
 {
     public class AddBillLadingViewModel
     {
+        public int Id { get; set; } 
+
         [Required]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; } = null!;

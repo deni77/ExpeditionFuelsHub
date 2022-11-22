@@ -41,5 +41,13 @@ namespace ExpeditionFuelsHub.Core.Contracts
 
         Task<bool> Exists(int id);
 
-          }
+         Task Edit(int billLadingId, AddBillLadingViewModel model);
+        Task<bool> HasFDispenserWithId(int billId, string currentUserId);
+
+        Task<int> GetBillLadingByPurposeId(int billId);
+        
+        Task<int> GetBillLadingDistributionChanelId(int billId);
+        Task<int> GetBillLadingProductId(int billId);
+        Task<int> GetBillLadingVehicleId(int billId);
+       }
 }

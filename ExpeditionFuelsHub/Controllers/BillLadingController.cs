@@ -2,6 +2,7 @@
 using ExpeditionFuelsHub.Core.Models.BillLading;
 using ExpeditionFuelsHub.Core.Models.BillLading.Service;
 using ExpeditionFuelsHub.Extensions;
+using ExpeditionFuelsHub.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -143,19 +144,117 @@ namespace ExpeditionFuelsHub.Controllers
             return RedirectToAction(nameof(Details),new { id } ); //new { id }
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    var model = new AddBillLadingViewModel();
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if ((await service.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All), new { area=""});
+            }
 
-        //    return View(model);
-        //}
+            if ((await service.HasFDispenserWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(int id, AddBillLadingViewModel model)
-        //{
-        //    return  RedirectToAction(nameof(Details), new { id  });// id="1"
-        //}
+            var bill = await service.BillLadingDetailsById(id);
+            var purposeId = await service.GetBillLadingByPurposeId(id); 
+            var productId = await service.GetBillLadingProductId(id);
+            var vehicleId = await service.GetBillLadingVehicleId(id);
+            var distributionchannelId = await service.GetBillLadingVehicleId(id); //????????????
+
+            var model = new AddBillLadingViewModel()
+            {
+                Id = bill.Id,
+                GrossStandartVolume = bill.GrossStandardVolume,
+                PurposeId = purposeId,
+                Mass = bill.Mass,
+                ImageUrl = bill.ImageUrl,
+               // CreatedOn =  DateTime.ParseExact(bill.CreatedOn, "dd-MM=yyyy HH:mm:ss",
+                                      // System.Globalization.CultureInfo.InvariantCulture),
+                VehicleId = vehicleId,
+                ProductId =productId,
+              DistributionChanelId = distributionchannelId,
+                BillsProducts  = await service.AllProducts(),
+                BillsDistributions = await service.AllDistributionChanels(),
+                BillsPurposes = await service.AllPurposes(),
+                BillsVehicles = await service.AllVehicles()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, AddBillLadingViewModel model)
+        {
+           if (id != model.Id)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+         
+            if ((await service.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "BillLading does not exist");
+                model.BillsVehicles = await service.AllVehicles();
+                model.BillsPurposes = await service.AllPurposes();
+                model.BillsProducts = await service.AllProducts();
+                model.BillsDistributions = await service.AllDistributionChanels();
+
+                return View(model);
+            }
+
+            if ((await service.HasFDispenserWithId(model.Id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if ((await service.PurposeExists(model.PurposeId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.PurposeId), "Purpose does not exist");
+                 model.BillsPurposes = await service.AllPurposes();
+
+                return View(model);
+            }
+
+            if ((await service.ProductExists(model.ProductId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.ProductId), "Product does not exist");
+                 model.BillsProducts = await service.AllProducts();
+
+                return View(model);
+            }
+            if ((await service.DistributionChanelExists(model.DistributionChanelId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.DistributionChanelId), "DistributionChanel does not exist");
+                 model.BillsDistributions= await service.AllDistributionChanels();
+
+                return View(model);
+            }
+
+            if ((await service.VehicleExists(model.VehicleId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.VehicleId), "Vehicle does not exist");
+                 model.BillsVehicles= await service.AllVehicles();
+
+                return View(model);
+            }
+
+
+            if (ModelState.IsValid == false)
+            {
+                model.BillsPurposes = await service.AllPurposes();
+                model.BillsDistributions = await service.AllDistributionChanels();
+                model.BillsVehicles = await service.AllVehicles();
+                model.BillsProducts = await service.AllProducts();
+
+                return View(model);
+            }
+
+            await service.Edit(model.Id, model);
+
+            return RedirectToAction(nameof(Details), new { model.Id });
+        }
 
         // public IActionResult Delete(int id)
         //{

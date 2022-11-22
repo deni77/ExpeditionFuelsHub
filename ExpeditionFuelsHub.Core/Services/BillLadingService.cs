@@ -8,6 +8,7 @@ using static ExpeditionFuelsHub.Core.Models.BillLading.Service.BillLadingQueryMo
 using ExpeditionFuelsHub.Views.BillLading.EnumSorting;
 using ExpeditionFuelsHub.Core.Models.BillLading.Service;
 using ExpeditionFuelsHub.Core.Models.FDispenser;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ExpeditionFuelsHub.Services
 {
@@ -40,17 +41,6 @@ namespace ExpeditionFuelsHub.Services
                     .Where(h => EF.Functions.Like(h.DistributionChannel.Name.ToLower(), searchTerm) ||
                          EF.Functions.Like(h.Product.FullName.ToLower(), searchTerm));
             }
-
-            //switch (sorting)
-            //{
-            //    case HouseSorting.Price:
-            //        houses = houses
-            //        .OrderBy(h => h.PricePerMonth);
-            //        break;
-            //    //    default:
-            //        houses = houses.OrderByDescending(h => h.Id);
-            //        break;
-            //}
 
             billLadings = sorting switch
             {
@@ -245,19 +235,22 @@ namespace ExpeditionFuelsHub.Services
                 .Select(h => new DetailsBillLadingViewModel() 
                 {
                      DistributionChannel=h.DistributionChannel.Name,
-                      GrossStandardVolume=h.GrossStandardVolume,
-                       Product=h.Product.FullName,
-                        Purpose=h.Purpose.Name,
-                         Vehicle=h.Vehicle.RegistrationNumber,
-                    Id = id,
+                    
+                      GrossStandardVolume =h.GrossStandardVolume,
+                       Purpose=h.Purpose.Name,
+                       Vehicle=h.Vehicle.RegistrationNumber,
+                      Id = id,
                     ImageUrl = h.ImageUrl,
                      CreatedOn=h.CreatedOn.ToString("dd.MM.yyyy hh:MM:ss"),
-                     FDispenser = new FDispenserServiceModel() 
+                     Mass=h.Mass,
+                     Product=h.Product.FullName,
+
+                     FDispenser = new FDispenserServiceModel()
                     {
                         Email = h.FuelDispenser.User.Email,
                         PhoneNumber = h.FuelDispenser.PhoneNumber
                     }
-                    
+
                 })
                 .FirstAsync();
         }
@@ -267,5 +260,57 @@ namespace ExpeditionFuelsHub.Services
             return await repo.AllReadonly<BillLading>()
                 .AnyAsync(h => h.Id == id ); //&& h.IsActive
         }
+
+        public async Task Edit(int billLadingId, AddBillLadingViewModel model)
+        {
+            var bill = await repo.GetByIdAsync<BillLading>(billLadingId);
+
+            bill.GrossStandardVolume = model.GrossStandartVolume;
+             bill.Mass = model.Mass;//?????????????
+           bill.PurposeId = model.PurposeId;
+           bill.ProductId = model.ProductId;
+          //bill.CreatedOn = DateTime.ParseExact(model.CreatedOn, "dd-MM-yyyy HH:mm:ss.fffffff", System.Globalization.CultureInfo.InvariantCulture);
+            bill.CreatedOn = model.CreatedOn;
+            bill.DistributionChannelId=model.DistributionChanelId;
+           
+           bill.VehicleId=model.VehicleId;
+       
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<bool> HasFDispenserWithId(int billId, string currentUserId)
+        {
+             bool result = false;
+            var bill = await repo.AllReadonly<BillLading>()
+                //.Where(h => h.IsActive)
+                .Where(h => h.Id == billId)
+                .Include(h => h.FuelDispenser)
+                .FirstOrDefaultAsync();
+
+            if (bill?.FuelDispenser != null && bill.FuelDispenser.UserId == currentUserId)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        public async Task<int> GetBillLadingByPurposeId(int billId) // trqbva li i za Product, Vehicle i Distrb.channel
+        {
+            return (await repo.GetByIdAsync<BillLading>(billId)).PurposeId;
+        }
+        public async Task<int> GetBillLadingDistributionChanelId(int billId) 
+        {
+            return (await repo.GetByIdAsync<BillLading>(billId)).DistributionChannelId;
+        }
+        public async Task<int> GetBillLadingProductId(int billId) 
+        {
+            return (await repo.GetByIdAsync<BillLading>(billId)).ProductId;
+        }
+         public async Task<int> GetBillLadingVehicleId(int billId) 
+        {
+            return (await repo.GetByIdAsync<BillLading>(billId)).VehicleId;
+        }
+      
     }
 }

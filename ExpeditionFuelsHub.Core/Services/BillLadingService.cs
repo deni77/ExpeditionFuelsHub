@@ -25,7 +25,7 @@ namespace ExpeditionFuelsHub.Services
             BillLadingSorting sorting = BillLadingSorting.Newest, int currentPage = 1, int billladingPerPage = 1)
         {
             BillLadingQueryModel result = new BillLadingQueryModel();
-            var billLadings = repo.AllReadonly<BillLading>();
+            var billLadings = repo.AllReadonly<BillLading>().Where(b=>b.IsActive);
 
             if (string.IsNullOrEmpty(purpose) == false)
             {
@@ -105,7 +105,7 @@ namespace ExpeditionFuelsHub.Services
         public async Task<IEnumerable<BillLadingServiceModel>> AllBillLadingsByFDispenserId(int id)
         {
             return await repo.AllReadonly<BillLading>()
-                  .Where(h => h.FuelDispenserId == id)
+                  .Where(h => h.FuelDispenserId == id && h.IsActive==true)
                 .Select(h => new BillLadingServiceModel() 
                 {
                     Product=h.Product.FullName,
@@ -171,11 +171,12 @@ namespace ExpeditionFuelsHub.Services
                 CreatedOn = model.CreatedOn,
                 Mass = model.Mass,
                 GrossStandardVolume = model.GrossStandartVolume,
-                  DistributionChannelId=model.DistributionChanelId,
-                   ProductId=model.ProductId,
-                    PurposeId=model.PurposeId,
-                     VehicleId=model.VehicleId,
-                FuelDispenserId = fDispecherId
+                DistributionChannelId = model.DistributionChanelId,
+                ProductId = model.ProductId,
+                PurposeId = model.PurposeId,
+                VehicleId = model.VehicleId,
+                FuelDispenserId = fDispecherId,
+                IsActive = true,
             };
 
             await repo.AddAsync(billLading);
@@ -193,6 +194,7 @@ namespace ExpeditionFuelsHub.Services
         public async Task<IEnumerable<BillLadingServiceViewModel>> GetLastTwoBillLadingAsync()
         {
             var entities = await this.repo.AllReadonly<BillLading>()
+                .Where(b=>b.IsActive)
                  .Include(g => g.Vehicle)
                  .Include(g => g.Product)
                 .OrderByDescending(x => x.Id).ToListAsync();
@@ -230,7 +232,7 @@ namespace ExpeditionFuelsHub.Services
         public async Task<DetailsBillLadingViewModel> BillLadingDetailsById(int id)
         {
              return await repo.AllReadonly<BillLading>()
-                //.Where(h => h.IsActive)
+                .Where(h => h.IsActive)
                 .Where(h => h.Id == id)
                 .Select(h => new DetailsBillLadingViewModel() 
                 {
@@ -258,7 +260,7 @@ namespace ExpeditionFuelsHub.Services
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<BillLading>()
-                .AnyAsync(h => h.Id == id ); //&& h.IsActive
+                .AnyAsync(h => h.Id == id && h.IsActive); 
         }
 
         public async Task Edit(int billLadingId, AddBillLadingViewModel model)
@@ -266,7 +268,7 @@ namespace ExpeditionFuelsHub.Services
             var bill = await repo.GetByIdAsync<BillLading>(billLadingId);
 
             bill.GrossStandardVolume = model.GrossStandartVolume;
-             bill.Mass = model.Mass;//?????????????
+             bill.Mass = model.Mass;
            bill.PurposeId = model.PurposeId;
            bill.ProductId = model.ProductId;
           //bill.CreatedOn = DateTime.ParseExact(model.CreatedOn, "dd-MM-yyyy HH:mm:ss.fffffff", System.Globalization.CultureInfo.InvariantCulture);
@@ -282,7 +284,7 @@ namespace ExpeditionFuelsHub.Services
         {
              bool result = false;
             var bill = await repo.AllReadonly<BillLading>()
-                //.Where(h => h.IsActive)
+                .Where(h => h.IsActive)
                 .Where(h => h.Id == billId)
                 .Include(h => h.FuelDispenser)
                 .FirstOrDefaultAsync();
@@ -295,7 +297,7 @@ namespace ExpeditionFuelsHub.Services
             return result;
         }
 
-        public async Task<int> GetBillLadingByPurposeId(int billId) // trqbva li i za Product, Vehicle i Distrb.channel
+        public async Task<int> GetBillLadingByPurposeId(int billId) // isActive trqbva li?
         {
             return (await repo.GetByIdAsync<BillLading>(billId)).PurposeId;
         }
@@ -311,6 +313,13 @@ namespace ExpeditionFuelsHub.Services
         {
             return (await repo.GetByIdAsync<BillLading>(billId)).VehicleId;
         }
-      
+
+        public async Task Delete(int billLadingId)
+        {
+            var bill = await repo.GetByIdAsync<BillLading>(billLadingId);
+            bill.IsActive = false;
+
+            await repo.SaveChangesAsync();
+        }
     }
 }

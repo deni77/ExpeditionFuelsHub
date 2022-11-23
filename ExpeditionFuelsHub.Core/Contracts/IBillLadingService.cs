@@ -49,5 +49,7 @@ namespace ExpeditionFuelsHub.Core.Contracts
         Task<int> GetBillLadingDistributionChanelId(int billId);
         Task<int> GetBillLadingProductId(int billId);
         Task<int> GetBillLadingVehicleId(int billId);
+
+        Task Delete(int billLadingId);
        }
 }

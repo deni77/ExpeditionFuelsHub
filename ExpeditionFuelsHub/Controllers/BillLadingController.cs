@@ -58,11 +58,7 @@ namespace ExpeditionFuelsHub.Controllers
                 myBillLadings = await service.AllBillLadingsByFDispenserId(fDispenserId);
                 TempData["OwnersBill"] = "1";
             }
-            //else
-            //{
-            //    myBillLadings = await service.AllHousesByUserId(userId);
-            //}
-
+            
             return View(myBillLadings);
         }
 
@@ -256,22 +252,47 @@ namespace ExpeditionFuelsHub.Controllers
             return RedirectToAction(nameof(Details), new { model.Id });
         }
 
-        // public IActionResult Delete(int id)
-        //{
-        //    return View(new DetailsBillLadingViewModel());
-        //}
-
-        //[HttpPost]
-        //public IActionResult Delete(DetailsBillLadingViewModel model)
-        //{
-        //    return RedirectToAction("all");
-        //}
-
-        //the gp vyrza za buton
-        [HttpPost]
-        public IActionResult Delete(int id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            return RedirectToAction("All");
+            if ((await service.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All), new { area=""});
+            }
+
+            if ((await service.HasFDispenserWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            var bill = await service.BillLadingDetailsById(id);
+            var model = new DetailsBillLadingViewModel()
+            {
+                 Mass=bill.Mass,
+                  GrossStandardVolume=bill.GrossStandardVolume,
+                ImageUrl = bill.ImageUrl,
+                 Product=bill.Product
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DetailsBillLadingViewModel model)
+        {
+            if ((await service.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All), new { area=""});
+            }
+
+            if ((await service.HasFDispenserWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await service.Delete(id);
+
+            return RedirectToAction(nameof(All), new { area=""});
         }
     }
 }

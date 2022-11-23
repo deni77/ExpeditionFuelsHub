@@ -31,7 +31,8 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                              ProductId=1,
                               PurposeId=1,
                                VehicleId=1,
-                                ImageUrl="https://i.trade-cloud.com.cn/upload/6653/image/20211230/2_182318.jpg"
+                                ImageUrl="https://i.trade-cloud.com.cn/upload/6653/image/20211230/2_182318.jpg", 
+                                IsActive=true
                 },
                 new BillLading()
                 {
@@ -44,7 +45,8 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                         ProductId=2,
                         PurposeId=2,
                         VehicleId=1,
-                        ImageUrl="https://autoline.bg/img/s/vlekach-MAN-TGS-18-400---1598979707951979529_big--20090119595756984600.jpg"
+                        ImageUrl="https://autoline.bg/img/s/vlekach-MAN-TGS-18-400---1598979707951979529_big--20090119595756984600.jpg",
+                        IsActive=true
                 },
                 new BillLading()
                 {
@@ -57,7 +59,8 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Configuration
                         ProductId=3,
                         PurposeId=3,
                         VehicleId=3,
-                        ImageUrl="https://bg.csc-trucks.com/uploads/202221798/foton-10-000-liters-oil-tank-truck23496909900.jpg"
+                        ImageUrl="https://bg.csc-trucks.com/uploads/202221798/foton-10-000-liters-oil-tank-truck23496909900.jpg",
+                        IsActive=true
                  },
                
                  };

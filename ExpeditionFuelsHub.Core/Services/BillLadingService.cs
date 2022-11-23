@@ -9,6 +9,7 @@ using ExpeditionFuelsHub.Views.BillLading.EnumSorting;
 using ExpeditionFuelsHub.Core.Models.BillLading.Service;
 using ExpeditionFuelsHub.Core.Models.FDispenser;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using ExpeditionFuelsHub.Core.Exceptions;
 
 namespace ExpeditionFuelsHub.Services
 {
@@ -16,9 +17,12 @@ namespace ExpeditionFuelsHub.Services
     {
 
         private readonly IRepository repo;
-        public BillLadingService(IRepository _repo)
+
+        private readonly IGuard guard;
+        public BillLadingService(IRepository _repo,IGuard _guard)
         {
             repo = _repo;
+            guard=_guard;
         }
 
         public async Task<BillLadingQueryModel> All(string? purpose = null, string? searchTerm = null,
@@ -266,6 +270,7 @@ namespace ExpeditionFuelsHub.Services
         public async Task Edit(int billLadingId, AddBillLadingViewModel model)
         {
             var bill = await repo.GetByIdAsync<BillLading>(billLadingId);
+             guard.AgainstNull(bill, "BillLading can not be found !");
 
             bill.GrossStandardVolume = model.GrossStandartVolume;
              bill.Mass = model.Mass;
@@ -288,6 +293,8 @@ namespace ExpeditionFuelsHub.Services
                 .Where(h => h.Id == billId)
                 .Include(h => h.FuelDispenser)
                 .FirstOrDefaultAsync();
+
+            guard.AgainstNull(bill, "BillLading can not be found !");
 
             if (bill?.FuelDispenser != null && bill.FuelDispenser.UserId == currentUserId)
             {
@@ -317,6 +324,8 @@ namespace ExpeditionFuelsHub.Services
         public async Task Delete(int billLadingId)
         {
             var bill = await repo.GetByIdAsync<BillLading>(billLadingId);
+            guard.AgainstNull(bill, "BillLading can not be found !");
+
             bill.IsActive = false;
 
             await repo.SaveChangesAsync();

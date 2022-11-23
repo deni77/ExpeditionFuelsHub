@@ -5,9 +5,14 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpeditionFuelsHub", "ExpeditionFuelsHub\ExpeditionFuelsHub.csproj", "{B4899075-DA44-4AF9-848B-291A9720F794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpeditionFuelsHub.Infrastructure", "ExpeditionFuelsHub.Infrastructure\ExpeditionFuelsHub.Infrastructure.csproj", "{4982A0DB-BC78-42F9-BFA7-D09868AB71C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpeditionFuelsHub.Infrastructure", "ExpeditionFuelsHub.Infrastructure\ExpeditionFuelsHub.Infrastructure.csproj", "{4982A0DB-BC78-42F9-BFA7-D09868AB71C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpeditionFuelsHub.Core", "ExpeditionFuelsHub.Core\ExpeditionFuelsHub.Core.csproj", "{57C8FD16-2BA5-48D9-8FFC-7964CB5B7119}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpeditionFuelsHub.Core", "ExpeditionFuelsHub.Core\ExpeditionFuelsHub.Core.csproj", "{57C8FD16-2BA5-48D9-8FFC-7964CB5B7119}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A712259-BB4D-462F-BF4C-ABDF5BE8F341}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

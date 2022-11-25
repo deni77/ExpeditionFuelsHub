@@ -51,13 +51,13 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    // app.UseMigrationsEndPoint();
     app.UseDeveloperExceptionPage();// dobavih
+     app.UseMigrationsEndPoint();
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
-   app.UseHsts();
+   app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();

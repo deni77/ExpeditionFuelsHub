@@ -65,10 +65,10 @@ namespace ExpeditionFuelsHub.Controllers
         [AllowAnonymous]
          public async Task<IActionResult> Details(int id)
         {
-           if ((await service.Exists(id)) == false)
-            {
-                return RedirectToAction(nameof(All));
-            }
+           //if ((await service.Exists(id)) == false)
+           // {
+           //     return RedirectToAction(nameof(All));
+           // }
 
             var model = await service.BillLadingDetailsById(id);
 

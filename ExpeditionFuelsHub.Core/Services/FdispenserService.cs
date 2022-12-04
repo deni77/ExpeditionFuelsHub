@@ -4,6 +4,7 @@ using ExpeditionFuelsHub.Infrastructure.Data.Entities;
 using ExpeditionFuelsHub.Infrastrucure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,15 @@ namespace ExpeditionFuelsHub.Core.Services
       private readonly IRepository repo;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly  UserManager<IdentityUser> userManager;
+         private readonly ILogger logger;
 
         public FdispenserService(IRepository _repo,SignInManager<IdentityUser> _signInManager, 
-                                UserManager<IdentityUser> _userManager)
+                                UserManager<IdentityUser> _userManager, ILogger<FdispenserService> _logger)
         {
             repo = _repo;
             signInManager = _signInManager;
-            this.userManager = _userManager; 
+            this.userManager = _userManager;
+            logger = _logger;
         }
 
         public async Task AddToRoleFDispenser(string userId)
@@ -34,11 +37,17 @@ namespace ExpeditionFuelsHub.Core.Services
                 UserId = userId
             };
 
-           await  repo.AddAsync(iuserrole);
-          
-           await repo.SaveChangesAsync();
-            
-            
+             try
+            {
+                await repo.AddAsync(iuserrole);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(AddToRoleFDispenser), ex);
+                throw new ApplicationException("Database failed to AddToRoleFDispenser", ex);
+            }
+                        
             //sign in and sign out zaradi nowata rolq
             IdentityUser curUser = await userManager.FindByIdAsync(userId);
 
@@ -54,9 +63,16 @@ namespace ExpeditionFuelsHub.Core.Services
                 PhoneNumber = phoneNumber
             };
 
-           await repo.AddAsync(fdispenser);
-           
-            await repo.SaveChangesAsync();
+          try
+            {
+                await repo.AddAsync(fdispenser);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
            
         }
 

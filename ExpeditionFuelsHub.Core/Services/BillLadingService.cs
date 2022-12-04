@@ -10,6 +10,7 @@ using ExpeditionFuelsHub.Core.Models.BillLading.Service;
 using ExpeditionFuelsHub.Core.Models.FDispenser;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using ExpeditionFuelsHub.Core.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace ExpeditionFuelsHub.Services
 {
@@ -19,10 +20,13 @@ namespace ExpeditionFuelsHub.Services
         private readonly IRepository repo;
 
         private readonly IGuard guard;
-        public BillLadingService(IRepository _repo,IGuard _guard)
+
+        private readonly ILogger logger;
+        public BillLadingService(IRepository _repo,IGuard _guard, ILogger<BillLadingService> _logger)
         {
             repo = _repo;
             guard=_guard;
+            logger=_logger;
         }
 
         public async Task<BillLadingQueryModel> All(string? purpose = null, string? searchTerm = null,
@@ -183,8 +187,16 @@ namespace ExpeditionFuelsHub.Services
                 IsActive = true,
             };
 
-            await repo.AddAsync(billLading);
-            await repo.SaveChangesAsync();
+             try
+            {
+                await repo.AddAsync(billLading);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
 
             return billLading.Id;
         }
@@ -281,8 +293,17 @@ namespace ExpeditionFuelsHub.Services
             bill.DistributionChannelId=model.DistributionChanelId;
            
            bill.VehicleId=model.VehicleId;
-       
-            await repo.SaveChangesAsync();
+
+            try
+            {
+                 await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Edit), ex);
+                throw new ApplicationException("Database failed to edit info", ex);
+            }
+           
         }
 
         public async Task<bool> HasFDispenserWithId(int billId, string currentUserId)
@@ -328,7 +349,15 @@ namespace ExpeditionFuelsHub.Services
 
             bill.IsActive = false;
 
-            await repo.SaveChangesAsync();
+            try
+            {
+                 await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Delete), ex);
+                throw new ApplicationException("Database failed to delete info", ex);
+            }
         }
     }
 }

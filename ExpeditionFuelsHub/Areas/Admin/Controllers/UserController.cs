@@ -98,9 +98,17 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
             if (user != null)
             {
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                //if (result.Succeeded)
+                //{
+                //    return RedirectToAction("All", "BillLading",new { area=""});
+                //}
+                 if (result.Succeeded && await userManager.IsInRoleAsync(user,"Admin"))
+                {
+                    return RedirectToAction("Index", "Admin",new { area="Admin"});
+                }
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("All", "BillLading",new { area=""});
+                    return RedirectToAction("All", "BillLading", new { area = "" });
                 }
             }
 

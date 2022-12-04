@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ExpeditionFuelsHub.Infrastructure\ExpeditionFuelsHub.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Admin\" />
+  </ItemGroup>
+
 </Project>

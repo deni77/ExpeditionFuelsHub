@@ -25,7 +25,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="BillLading" asp-action="All">All BillLadings</a>
                         </li>
-                        @if (User?.Identity?.IsAuthenticated ?? false)
+                        @*User?.Identity?.IsAuthenticated ?? false &&*@
+                        @if ( User.IsInRole("Admin") || User.IsInRole("Fdispenser"))
                         {
                                <li class="nav-item">
                                                     <a class="nav-link text-dark" asp-area="" asp-controller="BillLading" asp-action="Mine">My billLadings</a>

@@ -5,6 +5,7 @@ using ExpeditionFuelsHub.Infrastrucure.Data;
 using ExpeditionFuelsHub.ModelBinders;
 using ExpeditionFuelsHub.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
+         options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
         options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
     });;
 
@@ -80,6 +82,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+//app.MapControllerRoute(
+//    name: "houseDetails",
+//    pattern: "BillLading/Details/{id}/{information}");
+
 app.MapRazorPages();
 
+app.UseResponseCaching();// dobavih
 app.Run();

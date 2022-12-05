@@ -18,6 +18,10 @@ namespace ExpeditionFuelsHub.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
             var bills=await this.service.GetLastTwoBillLadingAsync();
             return View(bills);
         }

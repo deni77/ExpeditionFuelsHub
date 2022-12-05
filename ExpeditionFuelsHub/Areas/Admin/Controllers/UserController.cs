@@ -1,4 +1,5 @@
-﻿using ExpeditionFuelsHub.Core.Models.User;
+﻿using ExpeditionFuelsHub.Core.Contracts.Admin;
+using ExpeditionFuelsHub.Core.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,16 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
         private readonly UserManager<IdentityUser> userManager;
 
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IUserService userService;
 
         public UserController(
             UserManager<IdentityUser> _userManager,
-            SignInManager<IdentityUser> _signInManager)
+            SignInManager<IdentityUser> _signInManager,
+            IUserService _userService)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            userService = _userService;
         }
 
         [HttpGet]
@@ -27,7 +31,7 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("All", "BillLading",new { area=""});
+                return RedirectToAction("All", "BillLading", new { area = "" });
             }
 
             var model = new RegisterViewModel();
@@ -58,7 +62,7 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
              // await signInManager.SignInAsync(user, isPersistent: false);
              // return RedirectToAction("All", "Movies");
 
-                return RedirectToAction("Login", "User",new { area="Admin"});
+                return RedirectToAction("Login", "User", new { area = "Admin" });
             }
 
             foreach (var err in result.Errors)
@@ -75,7 +79,7 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
-                return RedirectToAction("All", "BillLading", new { area=""});
+                return RedirectToAction("All", "BillLading", new { area = "" });
                 // return RedirectToAction("Index", "Home");
             }
 
@@ -102,9 +106,9 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
                 //{
                 //    return RedirectToAction("All", "BillLading",new { area=""});
                 //}
-                 if (result.Succeeded && await userManager.IsInRoleAsync(user,"Admin"))
+                if (result.Succeeded && await userManager.IsInRoleAsync(user, "Admin"))
                 {
-                    return RedirectToAction("Index", "Admin",new { area="Admin"});
+                    return RedirectToAction("Index", "Admin", new { area = "Admin" });
                 }
                 if (result.Succeeded)
                 {
@@ -121,7 +125,14 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
         {
             await signInManager.SignOutAsync();
 
-            return RedirectToAction("Index", "Home",new { area=""});
+            return RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        public async Task<IActionResult> All()
+        {
+            var model = await userService.All();
+
+            return View(model);
         }
     }
 }

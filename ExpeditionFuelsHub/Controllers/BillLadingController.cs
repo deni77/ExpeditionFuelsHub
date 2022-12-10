@@ -3,6 +3,7 @@ using ExpeditionFuelsHub.Core.Models.BillLading;
 using ExpeditionFuelsHub.Core.Models.BillLading.Service;
 using ExpeditionFuelsHub.Extensions;
 using ExpeditionFuelsHub.Infrastructure.Data.Entities;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -134,6 +135,22 @@ namespace ExpeditionFuelsHub.Controllers
             }
 
             int fDispecherId = await fdispenserService.GetfDispecherId(User.Id());
+
+            //-sanitizer-------------------------------
+            string sanitizedImageUrl = this.SanitizeString(model.ImageUrl);
+            if (string.IsNullOrEmpty(sanitizedImageUrl))
+            {
+                this.TempData["Error"] = "Please don't try to XSS :)";
+
+                 model.BillsDistributions = await service.AllDistributionChanels();
+                model.BillsPurposes=await service.AllPurposes();
+                model.BillsProducts = await service.AllProducts();
+                model.BillsVehicles = await service.AllVehicles();
+                
+                return RedirectToAction("Add", "BillLading", new { area = "" });
+            }
+
+            model.ImageUrl = sanitizedImageUrl;
 
             int id = await service.Create(model, fDispecherId);
 
@@ -293,6 +310,12 @@ namespace ExpeditionFuelsHub.Controllers
             await service.Delete(id);
 
             return RedirectToAction(nameof(All), new { area=""});
+        }
+        private string SanitizeString(string content)
+        {
+            HtmlSanitizer sanitizer = new HtmlSanitizer();
+
+            return sanitizer.Sanitize(content);
         }
     }
 }

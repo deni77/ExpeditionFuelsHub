@@ -17,11 +17,13 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
     {
          private readonly IRepository repo;
          private readonly IFDispenserService fdispenser;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UserService(IRepository _repo, IFDispenserService _fdispenser)
+        public UserService(IRepository _repo, IFDispenserService _fdispenser, UserManager<ApplicationUser> _userManager)
         {
             repo = _repo;
             fdispenser = _fdispenser;
+            userManager = _userManager;
         }
 
         public async Task<IEnumerable<UserServiceModel>> All()
@@ -29,6 +31,7 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
             List<UserServiceModel> result;
 
             result = await repo.AllReadonly<FuelDispenser>() 
+                .Where(a=>a.User.IsActive)
                 .Select(a => new UserServiceModel() 
                 {
                     UserId =a.UserId,
@@ -88,7 +91,24 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
 
         }
 
-       // public async Task<string> UserFullName(string userId)
+        public async Task<bool> Forget(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+
+            user.PhoneNumber = null;
+             user.Email = null;
+            user.IsActive = false;
+            user.NormalizedEmail = null;
+            user.NormalizedUserName = null;
+            user.PasswordHash = null;
+            user.UserName = $"forgottenUser-{DateTime.Now.Ticks}";
+
+            var result = await userManager.UpdateAsync(user);
+
+            return result.Succeeded;
+        }
+
+        // public async Task<string> UserFullName(string userId)
         //{
         //    var user = await repo.GetByIdAsync<IdentityUser>(userId);
 

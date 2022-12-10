@@ -16,5 +16,7 @@ namespace ExpeditionFuelsHub.Core.Contracts.Admin
          Task<IEnumerable<UserServiceModel>> AssignRole();
 
         Task AssignToRole(string iserid);
+
+          Task<bool> Forget(string userId);
     }
 }

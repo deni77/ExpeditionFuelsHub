@@ -1,4 +1,5 @@
-﻿using ExpeditionFuelsHub.Core.Contracts.Admin;
+﻿using ExpeditionFuelsHub.Core.Constants;
+using ExpeditionFuelsHub.Core.Contracts.Admin;
 using ExpeditionFuelsHub.Core.Models.User;
 using ExpeditionFuelsHub.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -148,6 +149,23 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
             await userService.AssignToRole( userid);
 
             return RedirectToAction("All", "User", new { area = "Admin" });
+        }
+
+         [HttpPost]
+        public async Task<IActionResult> Forget(string userId)
+        {
+            bool result = await userService.Forget(userId);
+
+            if (result)
+            {
+                TempData[MessageConstant.SuccessMessage] = "User is now delete";
+            }
+            else
+            {
+                TempData[MessageConstant.ErrorMessage] = "User is available";
+            }
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

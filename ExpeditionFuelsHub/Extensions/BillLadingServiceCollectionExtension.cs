@@ -21,6 +21,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
              services.AddScoped<IUserService, UserService>();
 
+              services.AddScoped<IVehicleService, VehicleService>();
+
              services.AddScoped<IGuard, Guard>();
             
             return services;

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ExpeditionFuelsHub.Core.Models.Admin.VehicleModel>
+
+
+<h2 style="align-content:center">Nomenclatures of the vehicles</h2>
+<br />
+<div class="row">
+    @foreach (var item in Model)
+    {
+               <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body text-center">
+                        <h4>RegistrationNumber:@item.RegistrationNumber</h4>
+                              <h4>VehicleDocumentNumber: @item.VehicleRegistrationDocumentNumber</h4>
+
+                    <br />
+                        <a asp-area="Admin" asp-controller="Vehicle" asp-action="Details" asp-route-id="@item.Id"
+                            class="btn btn-success">Details</a>
+
+                                   <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@item.Id"
+                              class="btn btn-warning">Edit</a>
+                                       <a asp-area="Admin" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@item.Id"
+                            class="btn btn-danger">Delete</a>
+
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

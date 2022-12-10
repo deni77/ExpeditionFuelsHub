@@ -1,5 +1,6 @@
 ﻿using ExpeditionFuelsHub.Core.Contracts.Admin;
 using ExpeditionFuelsHub.Core.Models.User;
+using ExpeditionFuelsHub.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +11,14 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IUserService userService;
 
         public UserController(
-            UserManager<IdentityUser> _userManager,
-            SignInManager<IdentityUser> _signInManager,
+            UserManager<ApplicationUser> _userManager,
+            SignInManager<ApplicationUser> _signInManager,
             IUserService _userService)
         {
             userManager = _userManager;
@@ -48,7 +49,7 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
                 return View(model);
             }
 
-            var user = new IdentityUser()
+            var user = new ApplicationUser()
             {
                 Email = model.Email,
                 UserName = model.UserName

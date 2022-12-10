@@ -16,12 +16,12 @@ namespace ExpeditionFuelsHub.Core.Services
     public class FdispenserService :IFDispenserService
     {
       private readonly IRepository repo;
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly  UserManager<IdentityUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly  UserManager<ApplicationUser> userManager;
          private readonly ILogger logger;
 
-        public FdispenserService(IRepository _repo,SignInManager<IdentityUser> _signInManager, 
-                                UserManager<IdentityUser> _userManager, ILogger<FdispenserService> _logger)
+        public FdispenserService(IRepository _repo,SignInManager<ApplicationUser> _signInManager, 
+                                UserManager<ApplicationUser> _userManager, ILogger<FdispenserService> _logger)
         {
             repo = _repo;
             signInManager = _signInManager;
@@ -49,10 +49,14 @@ namespace ExpeditionFuelsHub.Core.Services
             }
                         
             //sign in and sign out zaradi nowata rolq
-            IdentityUser curUser = await userManager.FindByIdAsync(userId);
+            ApplicationUser curUser = await userManager.FindByIdAsync(userId);
 
-            await signInManager.SignOutAsync();
+            if (userId=="87612856-d498-4529-b453-bgrfd8395082")
+            {
+                await signInManager.SignOutAsync();
             await signInManager.SignInAsync(curUser, false);
+            }
+            
         }
 
         public async Task Create(string userId, string phoneNumber)

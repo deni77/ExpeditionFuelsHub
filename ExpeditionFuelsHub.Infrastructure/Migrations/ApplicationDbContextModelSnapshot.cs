@@ -22,6 +22,129 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ExpeditionFuelsHub.Infrastructure.Data.Entities.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "87612856-d498-4529-b453-bgrfd8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e0971547-6d87-49bd-8651-63dfca2f0b4d",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = false,
+                            IsActive = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAELgwvNW7kf2qtBtq2440z7bnwHznfHR7QJQSKH8W0vAsP61cxI5c3SiNteIgtAzGug==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6843ef8c-f33b-47c2-9e9a-1458c657fc4a",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2b4a8880-4e9f-4312-8dec-5a054ee8ec88",
+                            Email = "fdispenser@mail.com",
+                            EmailConfirmed = false,
+                            IsActive = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "FDISPENSER@MAIL.COM",
+                            NormalizedUserName = "FDISPENSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIYQhO2WCYtl108GJHWCy84mVGKTi9LFKJj+Sd+ieqZtVKw8RqfYyRBsEGksQR5dLQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0945c88a-95c0-4f19-ab82-3d77c8b43c60",
+                            TwoFactorEnabled = false,
+                            UserName = "fdispenser"
+                        },
+                        new
+                        {
+                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "36f064e4-9c1f-4876-83aa-bf735e774119",
+                            Email = "guest@mail.com",
+                            EmailConfirmed = false,
+                            IsActive = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST@MAIL.COM",
+                            NormalizedUserName = "GUEST",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBsG8XVZFTcTLdvbHG2rUTspbdRp2fuG4eDO3t2HcIGBIAqiwy6FMZz1+pkGVRme7g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "30f1220e-bb75-45db-aa06-72ef9c930169",
+                            TwoFactorEnabled = false,
+                            UserName = "guest"
+                        });
+                });
+
             modelBuilder.Entity("ExpeditionFuelsHub.Infrastructure.Data.Entities.BillLading", b =>
                 {
                     b.Property<int>("Id")
@@ -81,7 +204,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 12, 4, 12, 42, 41, 822, DateTimeKind.Local).AddTicks(2557),
+                            CreatedOn = new DateTime(2022, 12, 10, 13, 59, 40, 839, DateTimeKind.Local).AddTicks(4212),
                             DistributionChannelId = 1,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 9768.876m,
@@ -95,7 +218,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2022, 12, 4, 12, 42, 41, 822, DateTimeKind.Local).AddTicks(2610),
+                            CreatedOn = new DateTime(2022, 12, 10, 13, 59, 40, 839, DateTimeKind.Local).AddTicks(4265),
                             DistributionChannelId = 2,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 9345768.876m,
@@ -109,7 +232,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2022, 12, 4, 12, 42, 41, 822, DateTimeKind.Local).AddTicks(2613),
+                            CreatedOn = new DateTime(2022, 12, 10, 13, 59, 40, 839, DateTimeKind.Local).AddTicks(4269),
                             DistributionChannelId = 3,
                             FuelDispenserId = 1,
                             GrossStandardVolume = 93768.876m,
@@ -356,21 +479,21 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "ecbc4f76-38fe-41a5-98cf-f201861000ae",
+                            ConcurrencyStamp = "23691c72-3134-46d8-960e-fdedf1481b6a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2787b74e-3c0v-466f-m8af-654d56fd9010",
-                            ConcurrencyStamp = "aa1cafaa-846b-4093-92cd-2bbedfd2761a",
+                            ConcurrencyStamp = "2a38175d-6a7d-4759-b7bf-62c71649d6c5",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
                             Id = "115e174e-5g0e-i46f-86af-458mkifd7210",
-                            ConcurrencyStamp = "c8db7ce9-71e4-437b-9cee-13769c4082af",
+                            ConcurrencyStamp = "dae46ae4-a4df-430e-835e-01491027ddc4",
                             Name = "Fdispenser",
                             NormalizedName = "FDISPENSER"
                         });
@@ -399,121 +522,6 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "87612856-d498-4529-b453-bgrfd8395082",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ff8d98d-9bd4-411b-80c4-3ff387691a06",
-                            Email = "admin@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@MAIL.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB3RGm5rHIfmxzyM/ug97CVPJ27y522TuZZHdc4J07SqOPmzPZQrUyflg6MXX3T0gQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "1775f20d-14ca-447c-9e5d-cd0e25ed204c",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        },
-                        new
-                        {
-                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "2a225ec6-ada2-4dd2-8f1f-bd3f54c3c8b3",
-                            Email = "fdispenser@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "FDISPENSER@MAIL.COM",
-                            NormalizedUserName = "FDISPENSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJVzrBJ4OzwO6LU4aaHsE6mNqiOzcmvE+w1CRZypFrrsOFb2KSU1EYJGG2Rt+mk88w==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "aba47984-d27e-4410-9c2f-ec70597d2c9f",
-                            TwoFactorEnabled = false,
-                            UserName = "fdispenser"
-                        },
-                        new
-                        {
-                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b3701488-815c-42ee-83ba-3b786f94ab80",
-                            Email = "guest@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "GUEST@MAIL.COM",
-                            NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOsL48gVFiijPc0+2SwQB1bc66wjJ38RtbQC4xeNl0ScK3/WlFrX4Us0jJnuglh/6Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "2788e9f7-23b3-4b31-b082-4018bd4b78ea",
-                            TwoFactorEnabled = false,
-                            UserName = "guest"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -663,7 +671,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
             modelBuilder.Entity("ExpeditionFuelsHub.Infrastructure.Data.Entities.FuelDispenser", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                    b.HasOne("ExpeditionFuelsHub.Infrastructure.Data.Entities.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -683,7 +691,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ExpeditionFuelsHub.Infrastructure.Data.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -692,7 +700,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ExpeditionFuelsHub.Infrastructure.Data.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -707,7 +715,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ExpeditionFuelsHub.Infrastructure.Data.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -716,7 +724,7 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ExpeditionFuelsHub.Infrastructure.Data.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

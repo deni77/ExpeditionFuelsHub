@@ -39,7 +39,8 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
 
             string[] fDispenserIds = result.Select(a => a.UserId).ToArray();
 
-            result.AddRange(await repo.AllReadonly<IdentityUser>()
+            result.AddRange(await repo.AllReadonly<ApplicationUser>()
+                .Where(u=>u.IsActive==true)
                 .Where(u => fDispenserIds.Contains(u.Id) == false)
                 .Select(u => new UserServiceModel() 
                 {
@@ -66,7 +67,8 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
 
             string[] fDispenserIds = result.Select(a => a.UserId).ToArray();
 
-            result.AddRange(await repo.AllReadonly<IdentityUser>()
+            result.AddRange(await repo.AllReadonly<ApplicationUser>()
+                .Where(u=>u.IsActive==true)
                 .Where(u => fDispenserIds.Contains(u.Id) == false)
                 .Select(u => new UserServiceModel()
                 {

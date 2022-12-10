@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 
 namespace ExpeditionFuelsHub.Infrastrucure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser> //, 
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string> //, 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

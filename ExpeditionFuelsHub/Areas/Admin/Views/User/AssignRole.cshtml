@@ -1,0 +1,32 @@
+﻿@model IEnumerable<UserServiceModel>
+
+@{
+    ViewBag.Title = "Assign role FDispenser to Users";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><label>Email</label></th>
+             <th><label>Assign role</label></th>
+        </tr>
+    </thead>
+    <tbody>           
+        @foreach (var user in Model)
+        {
+            @if (string.IsNullOrEmpty(user.PhoneNumber) == true)
+            {
+                            <tr>
+                                <td><label>@user.Email</label></td>
+                                <td> <a asp-area="Admin" asp-controller="User" asp-action="AssignToRole" asp-route-userid="@user.UserId"
+                            class="btn btn-success">AssignRole</a></td>
+
+                            </tr>
+            }
+        }
+
+    </tbody>
+</table>

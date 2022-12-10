@@ -134,5 +134,19 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> AssignRole()
+        {
+            var model = await userService.AssignRole();
+
+            return View(model);
+        }
+      
+        public async Task<IActionResult> AssignToRole(string userid)
+        {
+            await userService.AssignToRole( userid);
+
+            return RedirectToAction("All", "User", new { area = "Admin" });
+        }
     }
 }

@@ -1,5 +1,6 @@
 namespace ExpeditionFuelsHub.UnitTests
 {
+    [TestFixture]
     public class Tests
     {
         //private Summator summator;
@@ -9,7 +10,7 @@ namespace ExpeditionFuelsHub.UnitTests
           //  summator = new Summator();
 
         }
-
+       
         [Test]
         public void Test1()
         {

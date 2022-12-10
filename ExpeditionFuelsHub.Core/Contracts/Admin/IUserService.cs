@@ -12,5 +12,9 @@ namespace ExpeditionFuelsHub.Core.Contracts.Admin
        //  Task<string> UserFullName(string userId);
 
         Task<IEnumerable<UserServiceModel>> All();
+
+         Task<IEnumerable<UserServiceModel>> AssignRole();
+
+        Task AssignToRole(string iserid);
     }
 }

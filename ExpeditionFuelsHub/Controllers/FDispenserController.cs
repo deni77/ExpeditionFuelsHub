@@ -64,6 +64,8 @@ namespace ExpeditionFuelsHub.Controllers
 
             await service.AddToRoleFDispenser(userId);
 
+            TempData[MessageConstant.SuccessMessage] = "You are a FuelDispenser ! ";
+
             return RedirectToAction("All", "BillLading",new { area=""});
         }
     }

@@ -21,6 +21,8 @@ namespace ExpeditionFuelsHub.Infrastructure.Data.Entities
         public string RegistrationNumber  { get; set; }= null!;
 
         public List<BillLading> BillLadings  { get; set; } = new List<BillLading>();
+
+        public bool IsActive { get; set; } = true;
    
     }
 }

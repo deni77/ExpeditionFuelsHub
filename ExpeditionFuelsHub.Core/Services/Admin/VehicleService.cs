@@ -32,5 +32,22 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
                 })
                 .ToListAsync();
         }
+        public async Task<int> Create(VehicleModel model)
+        {
+                var vehicle = new Vehicle()
+                {
+                    RegistrationNumber = model.RegistrationNumber,
+                    VehicleRegistrationDocumentNumber = model.VehicleRegistrationDocumentNumber,
+                   
+                   // IsActive = true,
+                };
+
+
+                await repo.AddAsync(vehicle);
+                await repo.SaveChangesAsync();
+
+                return vehicle.Id;
+            }
+        }
     }
-}
+

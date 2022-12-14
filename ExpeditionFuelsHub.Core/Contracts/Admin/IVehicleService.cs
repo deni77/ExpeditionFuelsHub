@@ -10,5 +10,7 @@ namespace ExpeditionFuelsHub.Core.Contracts.Admin
     public interface IVehicleService
     {
         Task<IEnumerable<VehicleModel>> All();
+
+        Task<int> Create(VehicleModel model);
     }
 }

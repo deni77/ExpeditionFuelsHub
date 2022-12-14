@@ -3,6 +3,9 @@
 
 <h2 style="align-content:center">Nomenclatures of the vehicles</h2>
 <br />
+
+ <a asp-area="Admin" asp-controller="Vehicle" asp-action="Add"
+                            class="btn btn-success">Add new Item</a>
 <div class="row">
     @foreach (var item in Model)
     {
@@ -13,10 +16,7 @@
                               <h4>VehicleDocumentNumber: @item.VehicleRegistrationDocumentNumber</h4>
 
                     <br />
-                        <a asp-area="Admin" asp-controller="Vehicle" asp-action="Details" asp-route-id="@item.Id"
-                            class="btn btn-success">Details</a>
-
-                                   <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@item.Id"
+                                <a asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@item.Id"
                               class="btn btn-warning">Edit</a>
                                        <a asp-area="Admin" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@item.Id"
                             class="btn btn-danger">Delete</a>

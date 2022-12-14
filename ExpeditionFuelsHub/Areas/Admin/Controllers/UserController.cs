@@ -2,6 +2,7 @@
 using ExpeditionFuelsHub.Core.Contracts.Admin;
 using ExpeditionFuelsHub.Core.Models.User;
 using ExpeditionFuelsHub.Infrastructure.Data.Entities;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +57,14 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
                 UserName = model.UserName
             };
 
+            if (string.IsNullOrEmpty(this.SanitizeString(user.UserName)) ||
+                string.IsNullOrEmpty(this.SanitizeString(model.Password))||
+                string.IsNullOrEmpty(this.SanitizeString(model.ConfirmPassword)) )
+ {
+                TempData[MessageConstant.ErrorMessage] = "Please don't try to XSS :)";
+                  return RedirectToAction("Register", "User", new { area = "Admin" });
+            }
+
             var result = await userManager.CreateAsync(user, model.Password);
 
 
@@ -63,6 +72,8 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
             {// ako sled register трябва да логваме User
              // await signInManager.SignInAsync(user, isPersistent: false);
              // return RedirectToAction("All", "Movies");
+
+             TempData[MessageConstant.SuccessMessage] = "You are registered in the system !";
 
                 return RedirectToAction("Login", "User", new { area = "Admin" });
             }
@@ -99,6 +110,13 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
                 return View(model);
             }
 
+            if (string.IsNullOrEmpty(this.SanitizeString(model.UserName)) ||
+                string.IsNullOrEmpty(this.SanitizeString(model.Password)))
+            {
+                TempData[MessageConstant.ErrorMessage] = "Please don't try to XSS :)";
+                return RedirectToAction("Login", "User", new { area = "Admin" });
+            }
+
             var user = await userManager.FindByNameAsync(model.UserName);
 
             if (user != null)
@@ -127,6 +145,8 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
         {
             await signInManager.SignOutAsync();
 
+            TempData[MessageConstant.SuccessMessage] = "You are logout :)";
+
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 
@@ -146,8 +166,10 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
       
         public async Task<IActionResult> AssignToRole(string userid)
         {
-            await userService.AssignToRole( userid);
+             await userService.AssignToRole( userid);
 
+            TempData[MessageConstant.SuccessMessage] = "The role Fdispenser is assigned to the user !";
+           
             return RedirectToAction("All", "User", new { area = "Admin" });
         }
 
@@ -166,6 +188,13 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
             }
 
             return RedirectToAction(nameof(All));
+        }
+
+        private string SanitizeString(string content)
+        {
+            HtmlSanitizer sanitizer = new HtmlSanitizer();
+
+            return sanitizer.Sanitize(content);
         }
     }
 }

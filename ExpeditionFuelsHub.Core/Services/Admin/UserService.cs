@@ -86,7 +86,10 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
 
        public async Task AssignToRole(string iserid)
         {
-            await fdispenser.Create(iserid, "1234567");
+            Random rd=new Random();
+            int num = rd.Next(000000000, 999999999);
+
+            await fdispenser.Create(iserid, num.ToString());
             await fdispenser.AddToRoleFDispenser(iserid);
 
         }

@@ -1,4 +1,5 @@
-﻿using ExpeditionFuelsHub.Core.Contracts;
+﻿using ExpeditionFuelsHub.Core.Constants;
+using ExpeditionFuelsHub.Core.Contracts;
 using ExpeditionFuelsHub.Core.Models.BillLading;
 using ExpeditionFuelsHub.Core.Models.BillLading.Service;
 using ExpeditionFuelsHub.Extensions;
@@ -140,7 +141,7 @@ namespace ExpeditionFuelsHub.Controllers
             string sanitizedImageUrl = this.SanitizeString(model.ImageUrl);
             if (string.IsNullOrEmpty(sanitizedImageUrl))
             {
-                this.TempData["Error"] = "Please don't try to XSS :)";
+                this.TempData[MessageConstant.ErrorMessage] = "Please don't try to XSS :)";
 
                  model.BillsDistributions = await service.AllDistributionChanels();
                 model.BillsPurposes=await service.AllPurposes();
@@ -153,6 +154,8 @@ namespace ExpeditionFuelsHub.Controllers
             model.ImageUrl = sanitizedImageUrl;
 
             int id = await service.Create(model, fDispecherId);
+
+            TempData[MessageConstant.SuccessMessage] = "New BillLading is added !";
 
             return RedirectToAction(nameof(Details),new { id } ); //new { id }
         }
@@ -253,6 +256,19 @@ namespace ExpeditionFuelsHub.Controllers
                 return View(model);
             }
 
+            string sanitizedImageUrl = this.SanitizeString(model.ImageUrl);
+            if (string.IsNullOrEmpty(sanitizedImageUrl))
+            {
+                TempData[MessageConstant.ErrorMessage] = "Please don't try to XSS :)";
+
+                model.BillsDistributions = await service.AllDistributionChanels();
+                model.BillsPurposes = await service.AllPurposes();
+                model.BillsProducts = await service.AllProducts();
+                model.BillsVehicles = await service.AllVehicles();
+
+                return RedirectToAction("Edit", "BillLading", new { area = "" });
+            }
+
 
             if (ModelState.IsValid == false)
             {
@@ -265,6 +281,8 @@ namespace ExpeditionFuelsHub.Controllers
             }
 
             await service.Edit(model.Id, model);
+
+             TempData[MessageConstant.SuccessMessage] = "The BillLading is edded !";
 
             return RedirectToAction(nameof(Details), new { model.Id });
         }

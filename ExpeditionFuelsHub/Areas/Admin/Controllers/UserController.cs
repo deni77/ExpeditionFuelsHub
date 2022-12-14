@@ -190,6 +190,57 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult CreateNewUser()
+        {
+           var model = new RegisterViewModel();
+
+            return View("Register",model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewUser(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Register");
+            }
+
+            var user = new ApplicationUser()
+            {
+                Email = model.Email,
+                UserName = model.UserName
+            };
+
+            if (string.IsNullOrEmpty(this.SanitizeString(user.UserName)) ||
+                string.IsNullOrEmpty(this.SanitizeString(model.Password)) ||
+                string.IsNullOrEmpty(this.SanitizeString(model.ConfirmPassword)))
+            {
+                TempData[MessageConstant.ErrorMessage] = "Please don't try to XSS :)";
+                return View("Register", new RegisterViewModel());
+            }
+
+
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                TempData[MessageConstant.SuccessMessage] = "You are registered a new user !";
+
+                return View("Register");
+            }
+
+            foreach (var err in result.Errors)
+            {
+                ModelState.AddModelError("", err.Description);
+            }
+
+
+
+            return View("Register");
+        }
+
         private string SanitizeString(string content)
         {
             HtmlSanitizer sanitizer = new HtmlSanitizer();

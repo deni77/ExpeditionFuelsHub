@@ -37,16 +37,9 @@ namespace ExpeditionFuelsHub.Core.Services
                 UserId = userId
             };
 
-             try
-            {
-                await repo.AddAsync(iuserrole);
+               await repo.AddAsync(iuserrole);
                 await repo.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(nameof(AddToRoleFDispenser), ex);
-                throw new ApplicationException("Database failed to AddToRoleFDispenser", ex);
-            }
+            
                         
             //sign in and sign out zaradi nowata rolq
             ApplicationUser curUser = await userManager.FindByIdAsync(userId);
@@ -67,17 +60,9 @@ namespace ExpeditionFuelsHub.Core.Services
                 PhoneNumber = phoneNumber
             };
 
-          try
-            {
-                await repo.AddAsync(fdispenser);
+           await repo.AddAsync(fdispenser);
                 await repo.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(nameof(Create), ex);
-                throw new ApplicationException("Database failed to save info", ex);
-            }
-           
+              
         }
 
         public async Task<bool> ExistsById(string userId)

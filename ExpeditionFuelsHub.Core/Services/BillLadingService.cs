@@ -22,18 +22,18 @@ namespace ExpeditionFuelsHub.Services
         private readonly IGuard guard;
 
         private readonly ILogger logger;
-        public BillLadingService(IRepository _repo,IGuard _guard, ILogger<BillLadingService> _logger)
+        public BillLadingService(IRepository _repo, IGuard _guard, ILogger<BillLadingService> _logger)
         {
             repo = _repo;
-            guard=_guard;
-            logger=_logger;
+            guard = _guard;
+            logger = _logger;
         }
 
         public async Task<BillLadingQueryModel> All(string? purpose = null, string? searchTerm = null,
             BillLadingSorting sorting = BillLadingSorting.Newest, int currentPage = 1, int billladingPerPage = 1)
         {
             BillLadingQueryModel result = new BillLadingQueryModel();
-            var billLadings = repo.AllReadonly<BillLading>().Where(b=>b.IsActive);
+            var billLadings = repo.AllReadonly<BillLading>().Where(b => b.IsActive);
 
             if (string.IsNullOrEmpty(purpose) == false)
             {
@@ -54,23 +54,23 @@ namespace ExpeditionFuelsHub.Services
             {
                 BillLadingSorting.GrossStandartVolume => billLadings
                     .OrderBy(h => h.GrossStandardVolume),
-               _ => billLadings.OrderByDescending(h => h.Id)
+                _ => billLadings.OrderByDescending(h => h.Id)
             };
 
-           result.BillLadings = await billLadings
-                .Skip((currentPage - 1) * billladingPerPage)
-                .Take(billladingPerPage)
-                .Select(h => new BillLadingServiceModel
-                {
-                    Product=h.Product.FullName,
-                    Id = h.Id,
-                    ImageUrl = h.ImageUrl,
-                    DistributionChannel=h.DistributionChannel.Name,
-                     Purpose=h.Purpose.Name,
-                      Vehicle=h.Vehicle.RegistrationNumber,
-                       GrossStandardVolume=h.GrossStandardVolume
-                })
-                .ToListAsync();
+            result.BillLadings = await billLadings
+                 .Skip((currentPage - 1) * billladingPerPage)
+                 .Take(billladingPerPage)
+                 .Select(h => new BillLadingServiceModel
+                 {
+                     Product = h.Product.FullName,
+                     Id = h.Id,
+                     ImageUrl = h.ImageUrl,
+                     DistributionChannel = h.DistributionChannel.Name,
+                     Purpose = h.Purpose.Name,
+                     Vehicle = h.Vehicle.RegistrationNumber,
+                     GrossStandardVolume = h.GrossStandardVolume
+                 })
+                 .ToListAsync();
 
             result.TotalBillLadingCount = await billLadings.CountAsync();
 
@@ -102,7 +102,7 @@ namespace ExpeditionFuelsHub.Services
         {
             return await repo.AllReadonly<DistributionChannel>()
                 .OrderBy(c => c.Name)
-                .Select(c => new BillsDistributionChanelModel() 
+                .Select(c => new BillsDistributionChanelModel()
                 {
                     Id = c.Id,
                     Name = c.Name
@@ -113,16 +113,16 @@ namespace ExpeditionFuelsHub.Services
         public async Task<IEnumerable<BillLadingServiceModel>> AllBillLadingsByFDispenserId(int id)
         {
             return await repo.AllReadonly<BillLading>()
-                  .Where(h => h.FuelDispenserId == id && h.IsActive==true)
-                .Select(h => new BillLadingServiceModel() 
+                  .Where(h => h.FuelDispenserId == id && h.IsActive == true)
+                .Select(h => new BillLadingServiceModel()
                 {
-                    Product=h.Product.FullName,
+                    Product = h.Product.FullName,
                     Id = h.Id,
                     ImageUrl = h.ImageUrl,
-                    DistributionChannel=h.DistributionChannel.Name,
-                     Purpose=h.Purpose.Name,
-                      Vehicle=h.Vehicle.RegistrationNumber,
-                       GrossStandardVolume=h.GrossStandardVolume
+                    DistributionChannel = h.DistributionChannel.Name,
+                    Purpose = h.Purpose.Name,
+                    Vehicle = h.Vehicle.RegistrationNumber,
+                    GrossStandardVolume = h.GrossStandardVolume
                 })
                 .ToListAsync();
         }
@@ -131,7 +131,7 @@ namespace ExpeditionFuelsHub.Services
         {
             return await repo.AllReadonly<Product>()
                 .OrderBy(c => c.FullName)
-                .Select(c => new BillsProductModel() 
+                .Select(c => new BillsProductModel()
                 {
                     Id = c.Id,
                     FullName = c.FullName
@@ -143,7 +143,7 @@ namespace ExpeditionFuelsHub.Services
         {
             return await repo.AllReadonly<Purpose>()
                 .OrderBy(c => c.Name)
-                .Select(c => new BillsPurposeModel() 
+                .Select(c => new BillsPurposeModel()
                 {
                     Id = c.Id,
                     Name = c.Name
@@ -163,7 +163,7 @@ namespace ExpeditionFuelsHub.Services
         {
             return await repo.AllReadonly<Vehicle>()
                 .OrderBy(c => c.RegistrationNumber)
-                .Select(c => new BillsVehicleModel() 
+                .Select(c => new BillsVehicleModel()
                 {
                     Id = c.Id,
                     VehicleRegistrationDocumentNumber = c.RegistrationNumber
@@ -187,36 +187,28 @@ namespace ExpeditionFuelsHub.Services
                 IsActive = true,
             };
 
-             try
-            {
-                await repo.AddAsync(billLading);
-                await repo.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(nameof(Create), ex);
-                throw new ApplicationException("Database failed to save info", ex);
-            }
+            await repo.AddAsync(billLading);
+            await repo.SaveChangesAsync();
 
             return billLading.Id;
         }
 
         public async Task<bool> DistributionChanelExists(int distributionChanelId)
         {
-           return await repo.AllReadonly<DistributionChannel>()
-                .AnyAsync(c => c.Id == distributionChanelId);
+            return await repo.AllReadonly<DistributionChannel>()
+                 .AnyAsync(c => c.Id == distributionChanelId);
         }
 
         public async Task<IEnumerable<BillLadingServiceViewModel>> GetLastTwoBillLadingAsync()
         {
             var entities = await this.repo.AllReadonly<BillLading>()
-                .Where(b=>b.IsActive)
+                .Where(b => b.IsActive)
                  .Include(g => g.Vehicle)
                  .Include(g => g.Product)
                 .OrderByDescending(x => x.Id).ToListAsync();
 
 
-           return entities.Select(x => new BillLadingServiceViewModel()
+            return entities.Select(x => new BillLadingServiceViewModel()
             {
                 Id = x.Id,
                 ImageUrl = x.ImageUrl,
@@ -224,7 +216,7 @@ namespace ExpeditionFuelsHub.Services
                 Product = x.Product.FullName,
                 Vehicle = x.Vehicle.RegistrationNumber
             })
-                .Take(3);
+                 .Take(3);
         }
 
         public async Task<bool> ProductExists(int productId)
@@ -235,80 +227,73 @@ namespace ExpeditionFuelsHub.Services
 
         public async Task<bool> PurposeExists(int purposeId)
         {
-           return await repo.AllReadonly<Purpose>()
-                .AnyAsync(c => c.Id == purposeId);
+            return await repo.AllReadonly<Purpose>()
+                 .AnyAsync(c => c.Id == purposeId);
         }
 
         public async Task<bool> VehicleExists(int vehicleId)
         {
-             return await repo.AllReadonly<Vehicle>()
-                .AnyAsync(c => c.Id == vehicleId);
+            return await repo.AllReadonly<Vehicle>()
+               .AnyAsync(c => c.Id == vehicleId);
         }
 
         public async Task<DetailsBillLadingViewModel> BillLadingDetailsById(int id)
         {
-             return await repo.AllReadonly<BillLading>()
-                .Where(h => h.IsActive)
-                .Where(h => h.Id == id)
-                .Select(h => new DetailsBillLadingViewModel() 
-                {
-                     DistributionChannel=h.DistributionChannel.Name,
-                    
-                      GrossStandardVolume =h.GrossStandardVolume,
-                       Purpose=h.Purpose.Name,
-                       Vehicle=h.Vehicle.RegistrationNumber,
-                      Id = id,
-                    ImageUrl = h.ImageUrl,
-                     CreatedOn=h.CreatedOn.ToString("dd.MM.yyyy hh:MM:ss"),
-                     Mass=h.Mass,
-                     Product=h.Product.FullName,
+            return await repo.AllReadonly<BillLading>()
+               .Where(h => h.IsActive)
+               .Where(h => h.Id == id)
+               .Select(h => new DetailsBillLadingViewModel()
+               {
+                   DistributionChannel = h.DistributionChannel.Name,
 
-                     FDispenser = new FDispenserServiceModel()
-                    {
-                        Email = h.FuelDispenser.User.Email,
-                        PhoneNumber = h.FuelDispenser.PhoneNumber
-                    }
+                   GrossStandardVolume = h.GrossStandardVolume,
+                   Purpose = h.Purpose.Name,
+                   Vehicle = h.Vehicle.RegistrationNumber,
+                   Id = id,
+                   ImageUrl = h.ImageUrl,
+                   CreatedOn = h.CreatedOn.ToString("dd.MM.yyyy hh:MM:ss"),
+                   Mass = h.Mass,
+                   Product = h.Product.FullName,
 
-                })
-                .FirstAsync();
+                   FDispenser = new FDispenserServiceModel()
+                   {
+                       Email = h.FuelDispenser.User.Email,
+                       PhoneNumber = h.FuelDispenser.PhoneNumber
+                   }
+
+               })
+               .FirstAsync();
         }
 
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<BillLading>()
-                .AnyAsync(h => h.Id == id && h.IsActive); 
+                .AnyAsync(h => h.Id == id && h.IsActive);
         }
 
         public async Task Edit(int billLadingId, AddBillLadingViewModel model)
         {
             var bill = await repo.GetByIdAsync<BillLading>(billLadingId);
-             guard.AgainstNull(bill, "BillLading can not be found !");
+            guard.AgainstNull(bill, "BillLading can not be found !");
 
             bill.GrossStandardVolume = model.GrossStandartVolume;
-             bill.Mass = model.Mass;
-           bill.PurposeId = model.PurposeId;
-           bill.ProductId = model.ProductId;
-          //bill.CreatedOn = DateTime.ParseExact(model.CreatedOn, "dd-MM-yyyy HH:mm:ss.fffffff", System.Globalization.CultureInfo.InvariantCulture);
+            bill.Mass = model.Mass;
+            bill.PurposeId = model.PurposeId;
+            bill.ProductId = model.ProductId;
+            //bill.CreatedOn = DateTime.ParseExact(model.CreatedOn, "dd-MM-yyyy HH:mm:ss.fffffff", System.Globalization.CultureInfo.InvariantCulture);
             bill.CreatedOn = model.CreatedOn;
-            bill.DistributionChannelId=model.DistributionChanelId;
-           
-           bill.VehicleId=model.VehicleId;
+            bill.DistributionChannelId = model.DistributionChanelId;
 
-            try
-            {
-                 await repo.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(nameof(Edit), ex);
-                throw new ApplicationException("Database failed to edit info", ex);
-            }
-           
+            bill.VehicleId = model.VehicleId;
+
+            await repo.SaveChangesAsync();
+
+
         }
 
         public async Task<bool> HasFDispenserWithId(int billId, string currentUserId)
         {
-             bool result = false;
+            bool result = false;
             var bill = await repo.AllReadonly<BillLading>()
                 .Where(h => h.IsActive)
                 .Where(h => h.Id == billId)
@@ -329,15 +314,15 @@ namespace ExpeditionFuelsHub.Services
         {
             return (await repo.GetByIdAsync<BillLading>(billId)).PurposeId;
         }
-        public async Task<int> GetBillLadingDistributionChanelId(int billId) 
+        public async Task<int> GetBillLadingDistributionChanelId(int billId)
         {
             return (await repo.GetByIdAsync<BillLading>(billId)).DistributionChannelId;
         }
-        public async Task<int> GetBillLadingProductId(int billId) 
+        public async Task<int> GetBillLadingProductId(int billId)
         {
             return (await repo.GetByIdAsync<BillLading>(billId)).ProductId;
         }
-         public async Task<int> GetBillLadingVehicleId(int billId) 
+        public async Task<int> GetBillLadingVehicleId(int billId)
         {
             return (await repo.GetByIdAsync<BillLading>(billId)).VehicleId;
         }
@@ -349,15 +334,8 @@ namespace ExpeditionFuelsHub.Services
 
             bill.IsActive = false;
 
-            try
-            {
-                 await repo.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(nameof(Delete), ex);
-                throw new ApplicationException("Database failed to delete info", ex);
-            }
+
+            await repo.SaveChangesAsync();
         }
     }
 }

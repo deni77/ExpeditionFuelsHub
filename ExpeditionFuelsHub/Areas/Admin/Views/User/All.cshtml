@@ -32,10 +32,18 @@
                                 <label class="text-center">❌</label>
                     }
                     </td>
+
+                
                     <td>
-                        <form asp-area="Admin" asp-controller="User" asp-action="Forget" asp-route-userId="@user.UserId"  method="post">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                    @if (user.UserId != "87612856-d498-4529-b453-bgrfd8395082" &&
+                                   user.UserId != "dea12856-c198-4129-b3f3-b893d8395082")
+                    {
+         <form asp-area="Admin" asp-controller="User" asp-action="Forget" asp-route-userId="@user.UserId"  method="post">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                    }
+                       
+                        
                     </td>
                 </tr>
         }

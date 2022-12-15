@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExpeditionFuelsHub.Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class Itial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -288,9 +288,9 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "115e174e-5g0e-i46f-86af-458mkifd7210", "647aabd0-869d-4735-93bf-af563cc07c31", "Fdispenser", "FDISPENSER" },
-                    { "2787b74e-3c0v-466f-m8af-654d56fd9010", "50cd3d99-5b33-40a6-9f9f-6ab0bcb48f56", "User", "User" },
-                    { "2c5e174e-3b0e-446f-86af-483d56fd7210", "080109a4-581c-4538-a7ca-2e36977d8ad1", "Admin", "ADMIN" }
+                    { "115e174e-5g0e-i46f-86af-458mkifd7210", "1994dfb7-8673-4372-8bd3-657a94f96325", "Fdispenser", "FDISPENSER" },
+                    { "2787b74e-3c0v-466f-m8af-654d56fd9010", "f329c9df-eec4-4289-9aa9-7538e49e8939", "User", "User" },
+                    { "2c5e174e-3b0e-446f-86af-483d56fd7210", "1f360438-3aa0-4974-918d-ce5427d82860", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -298,9 +298,9 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsActive", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "947bd4b2-7e11-41b2-9089-98db5a3b7383", "guest@mail.com", false, true, false, null, "GUEST@MAIL.COM", "GUEST", "AQAAAAEAACcQAAAAEE7u5ZJfeulDdTjFlt8dO7MdBa56ynm6j5zB/oCeDJwP5M6uPCSIJw9bPomH9+2Idw==", null, false, "f7200db1-d439-4331-8413-706f24f00f55", false, "guest" },
-                    { "87612856-d498-4529-b453-bgrfd8395082", 0, "d0b65ec6-a32c-423f-929a-1e5d34647426", "admin@mail.com", false, true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEOU76Rq33CPAVWRzhuAjW5zwkXT2QsY/aIRO7Fv7/kY8eIQNa7FZZR5YJGtFmKucvQ==", null, false, "38e1b774-a409-42bc-87bb-47df6b09e991", false, "admin" },
-                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "61f0a90e-fc22-400b-89ee-1f55e5f7d4bf", "fdispenser@mail.com", false, true, false, null, "FDISPENSER@MAIL.COM", "FDISPENSER", "AQAAAAEAACcQAAAAEMfBtIDZ8oh2xjmKxEHbyzfw/f2zClIndJ31EQNibRag+0bEN3FdzioaZR7chq+wnA==", null, false, "51bf6946-7278-4b28-8a1b-6d4b31139749", false, "fdispenser" }
+                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "e5616568-f3ee-4969-9e4f-272a67903b57", "guest@mail.com", false, true, false, null, "GUEST@MAIL.COM", "GUEST", "AQAAAAEAACcQAAAAEKlEM0pxPRmLbBExanBgLsPEIza/1QeTDTE+PrYbhIkEIMxSdr3nJfdnOigcuAFwCg==", null, false, "19e48b49-113b-4d05-86f8-70ea3c1b4694", false, "guest" },
+                    { "87612856-d498-4529-b453-bgrfd8395082", 0, "0a97a6e0-b6db-44cc-b46c-b8d689bf579a", "admin@mail.com", false, true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAENJHIT+LsY5kNb4Gwn46U8pC8V9RaUuqflnnnVp9mA+yLtnC+ZToNE0GSwD9ILlhPQ==", null, false, "e5fb0b95-a6ce-459f-a0ae-e7f3b9317c85", false, "admin" },
+                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "8f737030-17fa-463b-a684-b6cd5764a665", "fdispenser@mail.com", false, true, false, null, "FDISPENSER@MAIL.COM", "FDISPENSER", "AQAAAAEAACcQAAAAEJZv5bZP357yYbxd4qwD59CkxH3e+N6vLcSjedqkarCHxth7apI4rW+BZoFK00CL6A==", null, false, "f06e5ce2-4793-47a9-8aea-a046dcd2d769", false, "fdispenser" }
                 });
 
             migrationBuilder.InsertData(
@@ -363,17 +363,17 @@ namespace ExpeditionFuelsHub.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "BillLadings",
                 columns: new[] { "Id", "CreatedOn", "DistributionChannelId", "FuelDispenserId", "GrossStandardVolume", "ImageUrl", "IsActive", "Mass", "ProductId", "PurposeId", "VehicleId" },
-                values: new object[] { 1, new DateTime(2022, 12, 14, 16, 33, 45, 864, DateTimeKind.Local).AddTicks(2536), 1, 1, 9768.876m, "https://i.trade-cloud.com.cn/upload/6653/image/20211230/2_182318.jpg", true, 3423.879m, 1, 1, 1 });
+                values: new object[] { 1, new DateTime(2022, 12, 15, 9, 23, 27, 776, DateTimeKind.Local).AddTicks(5687), 1, 1, 9768.876m, "https://i.trade-cloud.com.cn/upload/6653/image/20211230/2_182318.jpg", true, 3423.879m, 1, 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "BillLadings",
                 columns: new[] { "Id", "CreatedOn", "DistributionChannelId", "FuelDispenserId", "GrossStandardVolume", "ImageUrl", "IsActive", "Mass", "ProductId", "PurposeId", "VehicleId" },
-                values: new object[] { 2, new DateTime(2022, 12, 14, 16, 33, 45, 864, DateTimeKind.Local).AddTicks(2586), 2, 1, 9345768.876m, "https://autoline.bg/img/s/vlekach-MAN-TGS-18-400---1598979707951979529_big--20090119595756984600.jpg", true, 34453423.879m, 2, 2, 1 });
+                values: new object[] { 2, new DateTime(2022, 12, 15, 9, 23, 27, 776, DateTimeKind.Local).AddTicks(5741), 2, 1, 9345768.876m, "https://autoline.bg/img/s/vlekach-MAN-TGS-18-400---1598979707951979529_big--20090119595756984600.jpg", true, 34453423.879m, 2, 2, 1 });
 
             migrationBuilder.InsertData(
                 table: "BillLadings",
                 columns: new[] { "Id", "CreatedOn", "DistributionChannelId", "FuelDispenserId", "GrossStandardVolume", "ImageUrl", "IsActive", "Mass", "ProductId", "PurposeId", "VehicleId" },
-                values: new object[] { 3, new DateTime(2022, 12, 14, 16, 33, 45, 864, DateTimeKind.Local).AddTicks(2590), 3, 1, 93768.876m, "https://bg.csc-trucks.com/uploads/202221798/foton-10-000-liters-oil-tank-truck23496909900.jpg", true, 344423.879m, 3, 3, 3 });
+                values: new object[] { 3, new DateTime(2022, 12, 15, 9, 23, 27, 776, DateTimeKind.Local).AddTicks(5745), 3, 1, 93768.876m, "https://bg.csc-trucks.com/uploads/202221798/foton-10-000-liters-oil-tank-truck23496909900.jpg", true, 344423.879m, 3, 3, 3 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -228,8 +228,9 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
             {
                 TempData[MessageConstant.SuccessMessage] = "You are registered a new user !";
 
-                return View("Register");
-            }
+                // return View("Register", new RegisterViewModel() { });
+                return RedirectToAction("CreateNewUser", "User", new { area = "Admin" });
+              }
 
             foreach (var err in result.Errors)
             {
@@ -238,7 +239,7 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
 
 
 
-            return View("Register");
+            return View("Register", new RegisterViewModel() { });
         }
 
         private string SanitizeString(string content)

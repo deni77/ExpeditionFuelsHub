@@ -43,14 +43,14 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
             string[] fDispenserIds = result.Select(a => a.UserId).ToArray();
 
             result.AddRange(await repo.AllReadonly<ApplicationUser>()
-                .Where(u=>u.IsActive==true)
+                .Where(u => u.IsActive == true && (u.Id != "87612856-d498-4529-b453-bgrfd8395082") &&( u.Id!="dea12856-c198-4129-b3f3-b893d8395082"))
                 .Where(u => fDispenserIds.Contains(u.Id) == false)
-                .Select(u => new UserServiceModel() 
+                .Select(u => new UserServiceModel()
                 {
                     UserId = u.Id,
                     Email = u.Email,
-                    PhoneNumber=u.PhoneNumber
-                   }).ToListAsync());
+                    PhoneNumber = u.PhoneNumber
+                }).ToListAsync()); ;
 
             return result;
         }

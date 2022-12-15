@@ -22,14 +22,6 @@ namespace ExpeditionFuelsHub.Controllers
             fdispenserService = _fdispenserService; 
         }
 
-
-        //[AllowAnonymous]
-        //public async Task<IActionResult> All()
-        //{
-        //    var bills=await this.service.AllBillLadingAsync();
-        //    return View(bills);
-        //}
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery]AllBillLadingQueryModel query)

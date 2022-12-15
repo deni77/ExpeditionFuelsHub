@@ -80,7 +80,7 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
             vehicle.RegistrationNumber = model.RegistrationNumber;
             vehicle.VehicleRegistrationDocumentNumber = model.VehicleRegistrationDocumentNumber;
 
-            vehicle.Id = model.Id;
+           // vehicle.Id = model.Id;
 
             await repo.SaveChangesAsync();
         }

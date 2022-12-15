@@ -12,5 +12,7 @@ namespace ExpeditionFuelsHub.Core.Contracts.Admin
         Task<IEnumerable<VehicleModel>> All();
 
         Task<int> Create(VehicleModel model);
+
+         Task<bool> Exists(string registrationNumber, string VehicleRegistrationDocumentNumber);
     }
 }

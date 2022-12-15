@@ -23,19 +23,18 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
 
             return View(model);
         }
+
         [HttpGet]
          public async Task<IActionResult> Add()
         {
-            var model = new VehicleModel();
+           var model = new VehicleModel();
            
-
-            return View(model);
+           return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(VehicleModel model)
         {
-            // nqkakvi proweerki ???
             if (!ModelState.IsValid)
             {
                return View(model);

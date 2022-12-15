@@ -1,6 +1,7 @@
 ﻿using ExpeditionFuelsHub.Core.Contracts;
 using ExpeditionFuelsHub.Core.Contracts.Admin;
 using ExpeditionFuelsHub.Core.Exceptions;
+using ExpeditionFuelsHub.Core.Models.Admin;
 using ExpeditionFuelsHub.Core.Services.Admin;
 using ExpeditionFuelsHub.Infrastructure.Data.Common;
 using ExpeditionFuelsHub.Infrastructure.Data.Entities;
@@ -65,6 +66,35 @@ namespace ExpeditionFuelsHub.UnitTests.Services
             var vehicleCollection = await vehicleService.All();
 
             Assert.That(4, Is.EqualTo(vehicleCollection.Count()));
+           }
+
+         [Test]
+        public async Task TestVehicleAdd()
+        {
+            var loggerMock = new Mock<ILogger<VehicleService>>();
+            logger = loggerMock.Object;
+
+            repo = new Repository(applicationDbContext);
+
+            vehicleService = new VehicleService(repo);
+
+           var res = vehicleService.Create(new VehicleModel
+            {
+                 RegistrationNumber = "534543",
+                VehicleRegistrationDocumentNumber = "14234243"
+            });
+
+            var vehicleCollection = await vehicleService.All();
+
+            Assert.That(4, Is.EqualTo(vehicleCollection.Count()));
+           }
+
+          [Test]
+        public async Task TestVehicleExists()
+        {
+            var res = await vehicleService.Exists("AV9876BH", "ACF4566AS");
+
+            Assert.That(true, Is.EqualTo(res));
            }
     }
 }

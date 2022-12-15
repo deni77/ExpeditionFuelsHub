@@ -14,9 +14,9 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
     public class VehicleService : IVehicleService
     {
         private readonly IRepository repo;
-       public VehicleService(IRepository _repo)
+        public VehicleService(IRepository _repo)
         {
-            repo=_repo;
+            repo = _repo;
         }
 
 
@@ -27,27 +27,48 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
                 .Select(c => new VehicleModel()
                 {
                     Id = c.Id,
-                     RegistrationNumber = c.RegistrationNumber,
+                    RegistrationNumber = c.RegistrationNumber,
                     VehicleRegistrationDocumentNumber = c.RegistrationNumber
                 })
                 .ToListAsync();
         }
         public async Task<int> Create(VehicleModel model)
         {
-                var vehicle = new Vehicle()
-                {
-                    RegistrationNumber = model.RegistrationNumber,
-                    VehicleRegistrationDocumentNumber = model.VehicleRegistrationDocumentNumber,
-                   
-                   // IsActive = true,
-                };
+            var res = await this.Exists(model.RegistrationNumber, model.VehicleRegistrationDocumentNumber);
+            if (res==true)
+            {
+                return 0;
+            }
+
+            var vehicle = new Vehicle()
+            {
+                RegistrationNumber = model.RegistrationNumber,
+                VehicleRegistrationDocumentNumber = model.VehicleRegistrationDocumentNumber,
+
+                // IsActive = true,
+            };
 
 
-                await repo.AddAsync(vehicle);
-                await repo.SaveChangesAsync();
+            await repo.AddAsync(vehicle);
+            await repo.SaveChangesAsync();
 
-                return vehicle.Id;
+            return vehicle.Id;
+        }
+
+        public async Task<bool> Exists(string registrationNumber, string vehicleRegistrationDocumentNumber)
+        {
+            var res = await repo.AllReadonly<Vehicle>()
+                 .Where(u=>u.VehicleRegistrationDocumentNumber==vehicleRegistrationDocumentNumber 
+                            && u.RegistrationNumber==registrationNumber).ToListAsync();
+            if (res.Count!=0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
+}
 

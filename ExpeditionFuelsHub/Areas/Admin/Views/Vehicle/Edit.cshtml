@@ -1,15 +1,9 @@
-﻿@model ExpeditionFuelsHub.Core.Models.Admin.VehicleModel
-
-@{
-    ViewData["Title"] = "Add new item in Nomenclature Vehicle";
-}
-
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+﻿@model VehicleModel
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
+                  <input type="hidden" asp-for="@Model.Id" />
             <div class="form-group">
                 <label asp-for="RegistrationNumber"></label>
                 <input asp-for="RegistrationNumber" class="form-control" placeholder="RegistrationNumber...">
@@ -17,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="VehicleRegistrationDocumentNumber"></label>
-                <input asp-for="VehicleRegistrationDocumentNumber" class="form-control">
+                 <input asp-for="VehicleRegistrationDocumentNumber" class="form-control" placeholder="VehicleRegistrationDocumentNumber...">
                 <span asp-validation-for="VehicleRegistrationDocumentNumber" class="small text-danger"></span>
             </div>
 
@@ -27,7 +21,6 @@
         </form>
     </div>
 </div>
-
 @section Scripts {
-                <partial name="_ValidationScriptsPartial" />
+            <partial name="_ValidationScriptsPartial" />
 }

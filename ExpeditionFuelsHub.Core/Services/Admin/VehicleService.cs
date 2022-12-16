@@ -89,7 +89,7 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
         {
             var res = await repo.AllReadonly<Vehicle>()
                  .Where(u=>u.VehicleRegistrationDocumentNumber==vehicleRegistrationDocumentNumber 
-                            && u.RegistrationNumber==registrationNumber).ToListAsync();
+                            && u.RegistrationNumber==registrationNumber && u.IsActive).ToListAsync();
             if (res.Count!=0)
             {
                 return true;
@@ -103,7 +103,7 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
         public async Task<bool> Exists(int id)
         {
             var res = await repo.AllReadonly<Vehicle>()
-                 .Where(u=>u.Id==id).ToListAsync();
+                 .Where(u=>u.Id==id && u.IsActive).ToListAsync();
             if (res.Count!=0)
             {
                 return true;

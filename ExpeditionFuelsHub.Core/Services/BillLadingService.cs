@@ -162,6 +162,7 @@ namespace ExpeditionFuelsHub.Services
         public async Task<IEnumerable<BillsVehicleModel>> AllVehicles()
         {
             return await repo.AllReadonly<Vehicle>()
+                .Where(c=>c.IsActive)
                 .OrderBy(c => c.RegistrationNumber)
                 .Select(c => new BillsVehicleModel()
                 {

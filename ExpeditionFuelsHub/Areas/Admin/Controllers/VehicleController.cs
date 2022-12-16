@@ -55,8 +55,15 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
 
             int id = await vehicleService.Create(model);
 
-            TempData[MessageConstant.SuccessMessage] = "New item is added !";
-
+            if (id!=0)
+            {
+                 TempData[MessageConstant.SuccessMessage] = "New item is added !";
+            }
+            else 
+            {
+                TempData[MessageConstant.ErrorMessage] = "Vehicle with these items already exists !";
+            }
+           
             return RedirectToAction(nameof(All)); //new { id }
         }
 

@@ -133,5 +133,35 @@ namespace ExpeditionFuelsHub.Areas.Admin.Controllers
             return RedirectToAction(nameof(All), new { model.Id });
         }
 
+         [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if ((await vehicleService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All), new { area="Admin"});
+            }
+
+            var vehicle = await vehicleService.VehicleDetailsById(id);
+            var model = new VehicleModel()
+            {
+                  RegistrationNumber = vehicle.RegistrationNumber,
+                   VehicleRegistrationDocumentNumber=vehicle.VehicleRegistrationDocumentNumber    
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, VehicleModel model)
+        {
+            if ((await vehicleService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All), new { area = "Admin" });
+            }
+
+             await vehicleService.Delete(id);
+
+            return RedirectToAction(nameof(All), new { area = "Admin" });
+        }
     }
 }

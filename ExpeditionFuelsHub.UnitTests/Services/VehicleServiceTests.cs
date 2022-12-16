@@ -159,6 +159,32 @@ namespace ExpeditionFuelsHub.UnitTests.Services
 
             Assert.That(true, Is.EqualTo(res));
            }
+
+         [Test]
+        public async Task TestVehicleDelete()
+        {
+             var loggerMock = new Mock<ILogger<VehicleService>>();
+            logger = loggerMock.Object;
+
+            repo = new Repository(applicationDbContext);
+
+            vehicleService = new VehicleService(repo);
+
+            await repo.AddAsync(new Vehicle
+            {
+                Id = 151,
+                     VehicleRegistrationDocumentNumber="3456VGBHN",
+                      RegistrationNumber="34RTFV54"
+            });
+
+            await repo.SaveChangesAsync();
+
+            await vehicleService.Delete(151);
+
+            var dbDelete = await repo.GetByIdAsync<Vehicle>(151);
+
+            Assert.That(dbDelete.IsActive, Is.EqualTo(false));
+        }
     }
 }
 

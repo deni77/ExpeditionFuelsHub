@@ -26,6 +26,7 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
         public async Task<IEnumerable<VehicleModel>> All()
         {
             return await repo.AllReadonly<Vehicle>()
+                .Where(c=>c.IsActive)
                 .OrderBy(c => c.RegistrationNumber)
                 .Select(c => new VehicleModel()
                 {
@@ -75,7 +76,7 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
         public async Task Edit(int vehicleId, VehicleModel model)
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
-           // guard.AgainstNull(bill, "BillLading can not be found !");
+           // guard.AgainstNull(bill, "Vehicle can not be found !");
 
             vehicle.RegistrationNumber = model.RegistrationNumber;
             vehicle.VehicleRegistrationDocumentNumber = model.VehicleRegistrationDocumentNumber;
@@ -112,6 +113,17 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
             {
                 return false;
             }
+        }
+
+          public async Task Delete(int vehicleId)
+        {
+            var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
+           // guard.AgainstNull(bill, "Vehicle can not be found !");
+
+            vehicle.IsActive = false;
+
+
+            await repo.SaveChangesAsync();
         }
     }
 }

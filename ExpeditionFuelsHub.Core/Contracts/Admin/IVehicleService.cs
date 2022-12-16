@@ -21,5 +21,7 @@ namespace ExpeditionFuelsHub.Core.Contracts.Admin
          Task Edit(int vehicleId, VehicleModel model);
 
         Task<VehicleModel> VehicleDetailsById(int id);
+
+        Task Delete(int vehicleId);
     }
 }

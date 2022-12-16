@@ -17,9 +17,12 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
     public class VehicleService : IVehicleService
     {
         private readonly IRepository repo;
-        public VehicleService(IRepository _repo)
+         private readonly IGuard guard;
+
+        public VehicleService(IRepository _repo, IGuard _guard)
         {
             repo = _repo;
+            guard = _guard;
         }
 
 
@@ -76,7 +79,7 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
         public async Task Edit(int vehicleId, VehicleModel model)
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
-           // guard.AgainstNull(bill, "Vehicle can not be found !");
+            guard.AgainstNull(vehicle, "Vehicle can not be found !");
 
             vehicle.RegistrationNumber = model.RegistrationNumber;
             vehicle.VehicleRegistrationDocumentNumber = model.VehicleRegistrationDocumentNumber;
@@ -118,7 +121,7 @@ namespace ExpeditionFuelsHub.Core.Services.Admin
           public async Task Delete(int vehicleId)
         {
             var vehicle = await repo.GetByIdAsync<Vehicle>(vehicleId);
-           // guard.AgainstNull(bill, "Vehicle can not be found !");
+            guard.AgainstNull(vehicle, "Vehicle can not be found !");
 
             vehicle.IsActive = false;
 

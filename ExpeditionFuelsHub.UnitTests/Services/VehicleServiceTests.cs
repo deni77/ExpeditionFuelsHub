@@ -51,7 +51,7 @@ namespace ExpeditionFuelsHub.UnitTests.Services
 
             repo = new Repository(applicationDbContext);
 
-            vehicleService = new VehicleService(repo);
+            vehicleService = new VehicleService(repo, guard);
 
             await repo.AddRangeAsync(new List<Vehicle>()
             {
@@ -78,7 +78,7 @@ namespace ExpeditionFuelsHub.UnitTests.Services
 
             repo = new Repository(applicationDbContext);
 
-            vehicleService = new VehicleService(repo);
+            vehicleService = new VehicleService(repo, guard);
 
            var res = vehicleService.Create(new VehicleModel
             {
@@ -99,7 +99,7 @@ namespace ExpeditionFuelsHub.UnitTests.Services
 
             repo = new Repository(applicationDbContext);
 
-            vehicleService = new VehicleService(repo);
+            vehicleService = new VehicleService(repo, guard);
 
              await repo.AddAsync(new Vehicle()
             {
@@ -122,7 +122,7 @@ namespace ExpeditionFuelsHub.UnitTests.Services
 
             repo = new Repository(applicationDbContext);
 
-            vehicleService = new VehicleService(repo);
+            vehicleService = new VehicleService(repo, guard);
 
              await repo.AddAsync(new Vehicle
             {
@@ -168,7 +168,7 @@ namespace ExpeditionFuelsHub.UnitTests.Services
 
             repo = new Repository(applicationDbContext);
 
-            vehicleService = new VehicleService(repo);
+            vehicleService = new VehicleService(repo, guard );
 
             await repo.AddAsync(new Vehicle
             {
